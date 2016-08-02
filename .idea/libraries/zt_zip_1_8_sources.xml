@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="zt-zip-1.8-sources">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/zt-zip-1.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

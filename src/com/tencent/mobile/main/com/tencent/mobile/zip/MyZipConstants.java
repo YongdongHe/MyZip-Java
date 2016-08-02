@@ -1,0 +1,95 @@
+package com.tencent.mobile.main.com.tencent.mobile.zip;
+
+/**
+ * Created by realhe on 2016/7/21.
+ */
+interface MyZipConstants {
+    /**
+     *
+     [local file header 1]
+     [file data 1]
+     [data descriptor 1]
+     ..........
+     [local file header n]
+     [file data n]
+     [data descriptor n]
+
+     [archive decryption header]
+     [archive extra data record]
+     [central directory]
+     [zip64 end of central directory record]
+     [zip64 end of central directory locator]
+     [end of central directory record]
+     */
+    /*
+     * Header signatures
+     */
+    static long LOCSIG = 0x04034b50L;   // "PK\003\004"
+    static long EXTSIG = 0x08074b50L;   // "PK\007\008"
+    static long CENSIG = 0x02014b50L;   // "PK\001\002"
+    static long ENDSIG = 0x06054b50L;   // "PK\005\006"
+
+    /*
+    * reverse Header signatures with
+    */
+    static long LOCSIGCOMPARE = 0x504b0304L;   // "PK\003\004"
+    static long EXTSIGCOMPARE = 0x504b0708L;   // "PK\007\008"
+    static long CENSIGCOMPARE = 0x504b0102L;   // "PK\001\002"
+    static long ENDSIGCOMPARE = 0x504b0506L;   // "PK\005\006"
+
+    /*
+     * Header sizes in bytes (including signatures)
+     */
+    static final int LOCHDR = 30;       // LOC header size : local file header
+    static final int EXTHDR = 16;       // EXT header size : extra local (EXT) header
+    static final int CENHDR = 46;       // CEN header size : central directory file header
+    static final int ENDHDR = 22;       // END header size : end of central directory
+
+    /*
+     * Local file (LOC) header field offsets
+     */
+    static final int LOCVER = 4;        // version needed to extract
+    static final int LOCFLG = 6;        // general purpose bit flag
+    static final int LOCHOW = 8;        // compression method
+    static final int LOCTIM = 10;       // modification time
+    static final int LOCCRC = 14;       // uncompressed file crc-32 value
+    static final int LOCSIZ = 18;       // compressed size
+    static final int LOCLEN = 22;       // uncompressed size
+    static final int LOCNAM = 26;       // filename length
+    static final int LOCEXT = 28;       // extra field length
+
+    /*
+     * Extra local (EXT) header field offsets
+     */
+    static final int EXTCRC = 4;        // uncompressed file crc-32 value
+    static final int EXTSIZ = 8;        // compressed size
+    static final int EXTLEN = 12;       // uncompressed size
+
+    /*
+     * Central directory (CEN) header field offsets
+     */
+    static final int CENVEM = 4;        // version made by
+    static final int CENVER = 6;        // version needed to extract
+    static final int CENFLG = 8;        // encrypt, decrypt flags
+    static final int CENHOW = 10;       // compression method
+    static final int CENTIM = 12;       // modification time
+    static final int CENCRC = 16;       // uncompressed file crc-32 value
+    static final int CENSIZ = 20;       // compressed size
+    static final int CENLEN = 24;       // uncompressed size
+    static final int CENNAM = 28;       // filename length
+    static final int CENEXT = 30;       // extra field length
+    static final int CENCOM = 32;       // comment length
+    static final int CENDSK = 34;       // disk number start
+    static final int CENATT = 36;       // internal file attributes
+    static final int CENATX = 38;       // external file attributes
+    static final int CENOFF = 42;       // LOC header offset
+
+    /*
+     * End of central directory (END) header field offsets
+     */
+    static final int ENDSUB = 8;        // number of entries on this disk
+    static final int ENDTOT = 10;       // total number of entries
+    static final int ENDSIZ = 12;       // central directory size in bytes
+    static final int ENDOFF = 16;       // offset of first CEN header
+    static final int ENDCOM = 20;       // zip file comment length
+}

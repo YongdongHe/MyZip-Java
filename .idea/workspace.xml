@@ -22,11 +22,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-272">
-              <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
+            <state relative-caret-position="443">
+              <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -39,7 +39,56 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="19992">
               <caret line="1241" column="16" selection-start-line="1241" selection-start-column="16" selection-end-line="1241" selection-end-column="16" />
-              <folding />
+              <folding>
+                <element signature="e#0#54151#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#6252#6253#0" expanded="false" />
+                <element signature="e#6320#6321#0" expanded="false" />
+                <element signature="e#10189#10190#0" expanded="false" />
+                <element signature="e#10216#10217#0" expanded="false" />
+                <element signature="e#10398#10399#0" expanded="false" />
+                <element signature="e#10430#10431#0" expanded="false" />
+                <element signature="e#10907#10908#0" expanded="false" />
+                <element signature="e#10945#10946#0" expanded="false" />
+                <element signature="e#13541#13542#0" expanded="false" />
+                <element signature="e#13596#13597#0" expanded="false" />
+                <element signature="e#15414#15415#0" expanded="false" />
+                <element signature="e#15459#15460#0" expanded="false" />
+                <element signature="e#24549#24550#0" expanded="false" />
+                <element signature="e#24603#24604#0" expanded="false" />
+                <element signature="e#30347#30348#0" expanded="false" />
+                <element signature="e#30384#30385#0" expanded="false" />
+                <element signature="e#30684#30685#0" expanded="false" />
+                <element signature="e#30716#30717#0" expanded="false" />
+                <element signature="e#31041#31042#0" expanded="false" />
+                <element signature="e#31086#31087#0" expanded="false" />
+                <element signature="e#33262#33263#0" expanded="false" />
+                <element signature="e#33304#33305#0" expanded="false" />
+                <element signature="e#33338#33339#0" expanded="false" />
+                <element signature="e#33375#33376#0" expanded="false" />
+                <element signature="e#33413#33414#0" expanded="false" />
+                <element signature="e#33454#33455#0" expanded="false" />
+                <element signature="e#38943#38944#0" expanded="false" />
+                <element signature="e#38994#38995#0" expanded="false" />
+                <element signature="e#39436#39437#0" expanded="false" />
+                <element signature="e#39481#39482#0" expanded="false" />
+                <element signature="e#39886#39887#0" expanded="false" />
+                <element signature="e#39960#39961#0" expanded="false" />
+                <element signature="e#40600#40601#0" expanded="false" />
+                <element signature="e#40658#40659#0" expanded="false" />
+                <element signature="e#42227#42228#0" expanded="false" />
+                <element signature="e#42280#42281#0" expanded="false" />
+                <element signature="e#42326#42327#0" expanded="false" />
+                <element signature="e#42383#42384#0" expanded="false" />
+                <element signature="e#44775#44776#0" expanded="false" />
+                <element signature="e#44842#44843#0" expanded="false" />
+                <element signature="e#46390#46391#0" expanded="false" />
+                <element signature="e#46455#46456#0" expanded="false" />
+                <element signature="e#51499#51500#0" expanded="false" />
+                <element signature="e#51557#51558#0" expanded="false" />
+                <element signature="e#51597#51598#0" expanded="false" />
+                <element signature="e#51690#51691#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -64,11 +113,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UnPackHelper.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UnPackHelper.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnPackHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="148" column="49" selection-start-line="148" selection-start-column="49" selection-end-line="148" selection-end-column="49" />
+            <state relative-caret-position="312">
+              <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BitBuff.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/BitBuff.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="284">
+              <caret line="41" column="16" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MyZipUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="512">
+              <caret line="78" column="80" selection-start-line="78" selection-start-column="80" selection-end-line="78" selection-end-column="80" />
               <folding />
             </state>
           </provider>
@@ -115,10 +184,10 @@
         <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipUtils.java" />
         <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipDirectoryEntry.java" />
         <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipEntryIndex.java" />
-        <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/BitBuff.java" />
         <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnPackUtils.java" />
         <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipEntry.java" />
         <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipFile.java" />
+        <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/BitBuff.java" />
         <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/Main.java" />
         <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnPackHelper.java" />
       </list>
@@ -516,7 +585,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="1000" extended-state="0" />
+    <frame x="-8" y="-8" width="1296" height="1000" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -524,10 +593,10 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32996634" sideWeight="0.484375" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35465768" sideWeight="0.38203126" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35465768" sideWeight="0.39765626" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35465768" sideWeight="0.61796874" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35465768" sideWeight="0.60234374" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -536,7 +605,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31762066" sideWeight="0.7523438" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31762066" sideWeight="0.73828125" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -561,7 +630,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/tencent/mobile/main/Main.java</url>
-          <line>83</line>
+          <line>85</line>
           <properties />
           <option name="timeStamp" value="12" />
         </line-breakpoint>
@@ -571,8 +640,14 @@
           <properties />
           <option name="timeStamp" value="16" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnPackHelper.java</url>
+          <line>60</line>
+          <properties />
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="24" />
+      <option name="time" value="29" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -851,7 +926,56 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19992">
           <caret line="1241" column="16" selection-start-line="1241" selection-start-column="16" selection-end-line="1241" selection-end-column="16" />
-          <folding />
+          <folding>
+            <element signature="e#0#54151#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#6252#6253#0" expanded="false" />
+            <element signature="e#6320#6321#0" expanded="false" />
+            <element signature="e#10189#10190#0" expanded="false" />
+            <element signature="e#10216#10217#0" expanded="false" />
+            <element signature="e#10398#10399#0" expanded="false" />
+            <element signature="e#10430#10431#0" expanded="false" />
+            <element signature="e#10907#10908#0" expanded="false" />
+            <element signature="e#10945#10946#0" expanded="false" />
+            <element signature="e#13541#13542#0" expanded="false" />
+            <element signature="e#13596#13597#0" expanded="false" />
+            <element signature="e#15414#15415#0" expanded="false" />
+            <element signature="e#15459#15460#0" expanded="false" />
+            <element signature="e#24549#24550#0" expanded="false" />
+            <element signature="e#24603#24604#0" expanded="false" />
+            <element signature="e#30347#30348#0" expanded="false" />
+            <element signature="e#30384#30385#0" expanded="false" />
+            <element signature="e#30684#30685#0" expanded="false" />
+            <element signature="e#30716#30717#0" expanded="false" />
+            <element signature="e#31041#31042#0" expanded="false" />
+            <element signature="e#31086#31087#0" expanded="false" />
+            <element signature="e#33262#33263#0" expanded="false" />
+            <element signature="e#33304#33305#0" expanded="false" />
+            <element signature="e#33338#33339#0" expanded="false" />
+            <element signature="e#33375#33376#0" expanded="false" />
+            <element signature="e#33413#33414#0" expanded="false" />
+            <element signature="e#33454#33455#0" expanded="false" />
+            <element signature="e#38943#38944#0" expanded="false" />
+            <element signature="e#38994#38995#0" expanded="false" />
+            <element signature="e#39436#39437#0" expanded="false" />
+            <element signature="e#39481#39482#0" expanded="false" />
+            <element signature="e#39886#39887#0" expanded="false" />
+            <element signature="e#39960#39961#0" expanded="false" />
+            <element signature="e#40600#40601#0" expanded="false" />
+            <element signature="e#40658#40659#0" expanded="false" />
+            <element signature="e#42227#42228#0" expanded="false" />
+            <element signature="e#42280#42281#0" expanded="false" />
+            <element signature="e#42326#42327#0" expanded="false" />
+            <element signature="e#42383#42384#0" expanded="false" />
+            <element signature="e#44775#44776#0" expanded="false" />
+            <element signature="e#44842#44843#0" expanded="false" />
+            <element signature="e#46390#46391#0" expanded="false" />
+            <element signature="e#46455#46456#0" expanded="false" />
+            <element signature="e#51499#51500#0" expanded="false" />
+            <element signature="e#51557#51558#0" expanded="false" />
+            <element signature="e#51597#51598#0" expanded="false" />
+            <element signature="e#51690#51691#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -859,14 +983,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="14926">
           <caret line="914" column="37" selection-start-line="914" selection-start-column="37" selection-end-line="914" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/BitBuff.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
           <folding />
         </state>
       </provider>
@@ -891,16 +1007,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="78" column="80" selection-start-line="78" selection-start-column="80" selection-end-line="78" selection-end-column="80" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_25/src.zip!/java/util/BitSet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="512">
@@ -917,21 +1023,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnPackHelper.java">
+    <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="148" column="49" selection-start-line="148" selection-start-column="49" selection-end-line="148" selection-end-column="49" />
+        <state relative-caret-position="512">
+          <caret line="78" column="80" selection-start-line="78" selection-start-column="80" selection-end-line="78" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/BitBuff.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="41" column="16" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-272">
-          <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
+        <state relative-caret-position="443">
+          <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnPackHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

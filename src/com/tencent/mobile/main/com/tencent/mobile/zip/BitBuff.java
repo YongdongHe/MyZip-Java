@@ -36,11 +36,10 @@ public class BitBuff extends BitSet {
     public BitBuff reverse(){
         BitBuff temp = new BitBuff();
         for (int i = 0 ; i<buffLength ; i++){
-            temp.append(this.get(i));
+            temp.append(this.get(buffLength - i - 1));
         }
-        clear();
-        for (int i = buffLength -1 ;i >= 0 ; i--){
-            this.append(temp.get(i));
+        for (int i = 0 ; i<buffLength ; i++){
+            this.set(i,temp.get(i));
         }
         return this;
     }
@@ -60,7 +59,7 @@ public class BitBuff extends BitSet {
     public int getValue(){
         int value = 0;
         int factor = 0x1;
-        for (int i=buffLength-1;i>=0;i++){
+        for (int i=buffLength-1;i>=0;i--){
             if (this.get(i))value+=factor;
             factor <<= 1;
         }

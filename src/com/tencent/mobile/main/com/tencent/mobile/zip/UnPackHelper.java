@@ -71,12 +71,14 @@ public class UnPackHelper {
 
     private void dynamicHuffmanUnPack(){
         System.out.println("^");
-        HLIT = new BitBuff().append(getBit(5)).getValue() + 4;
+
+        HLIT = new BitBuff().append(getBit(5)).reverse().getValue() + 257;
         System.out.println("HLIT" + HLIT);
-        System.out.println("^^");
-        HDIST = new BitBuff().append(getBit(5)).getValue() + 257;
+
+        HDIST = new BitBuff().append(getBit(5)).reverse().getValue() + 1;
         System.out.println("HDIST" + HDIST);
-        HCLEN = new BitBuff().append(getBit(4)).getValue() + 1;
+
+        HCLEN = new BitBuff().append(getBit(4)).reverse().getValue() + 4;
         System.out.println("HCLEN" + HCLEN);
         getCLL(HCLEN);
     }

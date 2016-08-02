@@ -26,7 +26,9 @@ public class Main {
             //UnZipFunc();
             //DeflaterFunc();
             //System.out.println();
-
+            BitBuff bitBuff = new BitBuff();
+            bitBuff.append(1);
+            bitBuff.append(0);
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -19,6 +19,12 @@ public class BitBuff extends BitSet {
         return buffLength;
     }
 
+    @Override
+    public int length() {
+//        return super.length();
+        return buffLength;
+    }
+
     public BitBuff append(boolean bitValue){
         this.set(buffLength,bitValue);
         buffLength ++;
@@ -28,6 +34,14 @@ public class BitBuff extends BitSet {
     public BitBuff append(boolean[] bitValues){
         for(boolean value : bitValues){
             append(value);
+        }
+        return this;
+    }
+
+
+    public BitBuff append(BitBuff buff){
+        for (int i = 0 ; i < buff.getBuffLength() ;i++){
+            this.append(buff.get(i));
         }
         return this;
     }
@@ -42,6 +56,35 @@ public class BitBuff extends BitSet {
             this.set(i,temp.get(i));
         }
         return this;
+    }
+
+
+    public void insertBits(int insertIndex,boolean value,int num){
+        if (insertIndex < 0 ){
+            throw new IndexOutOfBoundsException();
+        }
+        if (buffLength > 0){
+            for (int i = buffLength - 1 ;i >= insertIndex ;i--){
+                this.set(i+num,this.get(i));
+            }
+        }
+        for (int i = insertIndex ; i < insertIndex + num ; i++){
+            this.set(i,value);
+        }
+        buffLength += num;
+    }
+
+    public static BitBuff convert(int value) {
+        BitBuff bits = new BitBuff();
+        while (value != 0) {
+            if (value % 2 != 0) {
+                bits.append(true);
+            }else {
+                bits.append(false);
+            }
+            value = value >>> 1;
+        }
+        return bits.reverse();
     }
 
     @Override

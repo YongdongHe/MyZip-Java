@@ -27,8 +27,9 @@ public class Main {
             //DeflaterFunc();
             //System.out.println();
             BitBuff bitBuff = new BitBuff();
-            bitBuff.append(1);
-            bitBuff.append(0);
+            bitBuff.insertBits(0,true,3);
+            System.out.println(bitBuff);
+
 
         } catch (IOException e) {
             e.printStackTrace();

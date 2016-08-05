@@ -39,8 +39,12 @@ public class UnPackHelper {
     int HCLEN;
 
     //动态huffman解码时所需的解码树
+
+    //CL1
     HashMap<BitBuff,Integer> huffman1;
+    //CL2
     HashMap<BitBuff,Integer> huffman2;
+    //CLL
     HashMap<BitBuff,Integer> huffman3;
 
 
@@ -70,7 +74,6 @@ public class UnPackHelper {
     }
 
     private void dynamicHuffmanUnPack(){
-        System.out.println("^");
 
         HLIT = new BitBuff().append(getBit(5)).reverse().getValue() + 257;
         System.out.println("HLIT" + HLIT);
@@ -80,10 +83,10 @@ public class UnPackHelper {
 
         HCLEN = new BitBuff().append(getBit(4)).reverse().getValue() + 4;
         System.out.println("HCLEN" + HCLEN);
-        getCLL(HCLEN);
+        initCLL(HCLEN);
     }
 
-    private void getCLL(int cll_length){
+    private void initCLL(int cll_length){
         buff.clear();
         //获得cll序列，总共
         int[] clls = new int[19];
@@ -95,8 +98,15 @@ public class UnPackHelper {
             Log(String.format("%s(%d)",buff.toString(),buff.getValue()));
         }
         int[] currentClls = UnPackUtils.getCurrentClls(clls);
-        Logln(Arrays.toString(currentClls));
+        Logln("\n" + Arrays.toString(currentClls));
+        huffman3 = UnPackUtils.getMapOfCCL(currentClls);
+        Logln("\nCLL Huffman Hash Map:\n");
+        UnPackUtils.printHuffmanTable(huffman3);
     }
+
+
+
+
 
     private void Log(String logMsg){
         System.out.print(logMsg);

@@ -1,6 +1,7 @@
 package com.tencent.mobile.main.com.tencent.mobile.zip;
 
 import java.util.BitSet;
+import java.util.HashMap;
 
 /**
  * Created by realhe on 2016/8/1.
@@ -104,6 +105,7 @@ public class UnPackUtils {
          3,17,15,13,11,9,7,5,4,6,8,10,12,14,16,18,0,1,2
     };
 
+    //获得置换后的cll
     public static int[] getCurrentClls(int[] clls){
         int[] curren_clls = new int[19];
         for (int i = 0;i<19;i++){
@@ -111,4 +113,60 @@ public class UnPackUtils {
         }
         return curren_clls;
     }
+
+    public static HashMap<BitBuff,Integer> getMapOfCCL(int[] clls){
+        //ccls中出现的最大值（huffman的高度）
+        int MAX_BITS = getMaxValue(clls);
+        //对huffman树每层叶子节点进行统计
+        int[] bl_count = new int[MAX_BITS + 1];
+        for (int i = 0;i<clls.length;i++){
+            bl_count[clls[i]] ++;
+        }
+        //当前层最左边的叶子节点的码字的值
+        int code = 0;
+        //将对0的统计清空
+        bl_count[0] = 0;
+        //存储每一层最左边的叶子节点的码字
+        int[] next_code = new int[MAX_BITS + 1];
+
+        for (int i = 1; i < MAX_BITS + 1;i++){
+            code = (code + bl_count[i-1]) << 1;
+            next_code[i] = code;
+        }
+
+        HashMap<BitBuff,Integer> map_cll = new HashMap<>();
+
+        for (int i = 0; i < clls.length ; i++ ){
+            //n为第i项cll所表示的码字长度
+            int n_clen = clls[i];
+            if (n_clen!=0){
+                BitBuff huffman_code = getInfatingBinary(BitBuff.convert(next_code[n_clen]),n_clen);
+                map_cll.put(huffman_code,i);
+                next_code[n_clen] ++;
+            }
+        }
+        return map_cll;
+    }
+
+    public static BitBuff getInfatingBinary(BitBuff bitBuff,int huffman_code_len){
+        int inflating_zeros = huffman_code_len - bitBuff.getBuffLength();
+        bitBuff.insertBits(0,false,inflating_zeros);
+        return bitBuff;
+    }
+
+    public static int getMaxValue(int[] values){
+        int max = values[0];
+        for (int i = 0;i<values.length;i++){
+            if (max < values[i] ) max = values[i];
+        }
+        return max;
+    }
+
+    public static void printHuffmanTable(HashMap<BitBuff,Integer> map){
+        for (BitBuff key : map.keySet()){
+            System.out.println(String.format("%s -> %d",key.toString(),map.get(key)));
+        }
+    }
+
+
 }

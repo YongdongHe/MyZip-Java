@@ -25,69 +25,10 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="29" column="27" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
+            <state relative-caret-position="49">
+              <caret line="103" column="33" selection-start-line="103" selection-start-column="33" selection-end-line="103" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ArrayList.java" pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_25/src.zip!/java/util/ArrayList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19992">
-              <caret line="1241" column="16" selection-start-line="1241" selection-start-column="16" selection-end-line="1241" selection-end-column="16" />
-              <folding>
-                <element signature="e#0#54151#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#6252#6253#0" expanded="false" />
-                <element signature="e#6320#6321#0" expanded="false" />
-                <element signature="e#10189#10190#0" expanded="false" />
-                <element signature="e#10216#10217#0" expanded="false" />
-                <element signature="e#10398#10399#0" expanded="false" />
-                <element signature="e#10430#10431#0" expanded="false" />
-                <element signature="e#10907#10908#0" expanded="false" />
-                <element signature="e#10945#10946#0" expanded="false" />
-                <element signature="e#13541#13542#0" expanded="false" />
-                <element signature="e#13596#13597#0" expanded="false" />
-                <element signature="e#15414#15415#0" expanded="false" />
-                <element signature="e#15459#15460#0" expanded="false" />
-                <element signature="e#24549#24550#0" expanded="false" />
-                <element signature="e#24603#24604#0" expanded="false" />
-                <element signature="e#30347#30348#0" expanded="false" />
-                <element signature="e#30384#30385#0" expanded="false" />
-                <element signature="e#30684#30685#0" expanded="false" />
-                <element signature="e#30716#30717#0" expanded="false" />
-                <element signature="e#31041#31042#0" expanded="false" />
-                <element signature="e#31086#31087#0" expanded="false" />
-                <element signature="e#33262#33263#0" expanded="false" />
-                <element signature="e#33304#33305#0" expanded="false" />
-                <element signature="e#33338#33339#0" expanded="false" />
-                <element signature="e#33375#33376#0" expanded="false" />
-                <element signature="e#33413#33414#0" expanded="false" />
-                <element signature="e#33454#33455#0" expanded="false" />
-                <element signature="e#38943#38944#0" expanded="false" />
-                <element signature="e#38994#38995#0" expanded="false" />
-                <element signature="e#39436#39437#0" expanded="false" />
-                <element signature="e#39481#39482#0" expanded="false" />
-                <element signature="e#39886#39887#0" expanded="false" />
-                <element signature="e#39960#39961#0" expanded="false" />
-                <element signature="e#40600#40601#0" expanded="false" />
-                <element signature="e#40658#40659#0" expanded="false" />
-                <element signature="e#42227#42228#0" expanded="false" />
-                <element signature="e#42280#42281#0" expanded="false" />
-                <element signature="e#42326#42327#0" expanded="false" />
-                <element signature="e#42383#42384#0" expanded="false" />
-                <element signature="e#44775#44776#0" expanded="false" />
-                <element signature="e#44842#44843#0" expanded="false" />
-                <element signature="e#46390#46391#0" expanded="false" />
-                <element signature="e#46455#46456#0" expanded="false" />
-                <element signature="e#51499#51500#0" expanded="false" />
-                <element signature="e#51557#51558#0" expanded="false" />
-                <element signature="e#51597#51598#0" expanded="false" />
-                <element signature="e#51690#51691#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -106,13 +47,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UnPackUtils.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UnPackUtils.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnPackUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2560">
-              <caret line="154" column="5" selection-start-line="154" selection-start-column="5" selection-end-line="154" selection-end-column="5" />
+            <state relative-caret-position="378">
+              <caret line="203" column="57" selection-start-line="203" selection-start-column="57" selection-end-line="203" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#6409#6410#0" expanded="true" />
+                <element signature="e#6455#6456#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -121,18 +64,62 @@
       <file leaf-file-name="UnPackHelper.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnPackHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+            <state relative-caret-position="154">
+              <caret line="155" column="43" selection-start-line="155" selection-start-column="43" selection-end-line="155" selection-end-column="43" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BitBuff.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MyZipEntry.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipEntry.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="355">
+              <caret line="50" column="58" selection-start-line="50" selection-start-column="58" selection-end-line="50" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UnpackException.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnpackException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
+              <folding>
+                <element signature="e#228#229#0" expanded="true" />
+                <element signature="e#258#259#0" expanded="true" />
+                <element signature="e#321#322#0" expanded="true" />
+                <element signature="e#358#359#0" expanded="true" />
+                <element signature="e#405#406#0" expanded="true" />
+                <element signature="e#433#434#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ZipFormatException.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/ZipFormatException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
+              <folding>
+                <element signature="e#239#240#0" expanded="true" />
+                <element signature="e#269#270#0" expanded="true" />
+                <element signature="e#335#336#0" expanded="true" />
+                <element signature="e#372#373#0" expanded="true" />
+                <element signature="e#422#423#0" expanded="true" />
+                <element signature="e#450#451#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BitBuff.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/BitBuff.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="71" column="30" selection-start-line="71" selection-start-column="30" selection-end-line="71" selection-end-column="30" />
+            <state relative-caret-position="-712">
+              <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -194,18 +181,19 @@
         <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipCompareConstants.java" />
         <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipConstants.java" />
         <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/ZipNotParedException.java" />
-        <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/ZipFormatException.java" />
         <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyMappedByteBuffer.java" />
         <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/InflateHelper.java" />
         <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipUtils.java" />
         <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipDirectoryEntry.java" />
         <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipEntryIndex.java" />
-        <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipEntry.java" />
         <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipFile.java" />
-        <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnPackUtils.java" />
-        <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/BitBuff.java" />
+        <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/ZipFormatException.java" />
+        <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnpackException.java" />
+        <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipEntry.java" />
         <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/Main.java" />
         <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnPackHelper.java" />
+        <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/BitBuff.java" />
+        <option value="$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnPackUtils.java" />
       </list>
     </option>
   </component>
@@ -606,27 +594,27 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.478125" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.47395834" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35374868" sideWeight="0.41302082" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3907075" sideWeight="0.42083332" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35374868" sideWeight="0.58697915" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3907075" sideWeight="0.57916665" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24895833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09010417" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50475186" sideWeight="0.7291667" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5395987" sideWeight="0.72291666" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -657,25 +645,25 @@
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/BitBuff.java</url>
-          <line>62</line>
+          <url>file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnPackUtils.java</url>
+          <line>170</line>
           <properties />
-          <option name="timeStamp" value="33" />
+          <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnPackUtils.java</url>
-          <line>142</line>
+          <line>183</line>
           <properties />
-          <option name="timeStamp" value="36" />
+          <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnPackUtils.java</url>
-          <line>151</line>
+          <line>185</line>
           <properties />
-          <option name="timeStamp" value="37" />
+          <option name="timeStamp" value="47" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="38" />
+      <option name="time" value="48" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -684,13 +672,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/lib/zt-zip-1.8-sources.jar!/org/zeroturnaround/zip/commons/FilenameUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="85" column="13" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/zt-zip-1.8-sources.jar!/org/zeroturnaround/zip/ByteSource.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -920,20 +901,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/ZipFormatException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/ZipNotParedException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="51" selection-start-line="5" selection-start-column="51" selection-end-line="5" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipDirectoryEntry.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1021,13 +988,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipEntry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="52" column="36" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="549">
@@ -1047,39 +1007,87 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/ZipNotParedException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/ZipFormatException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
+          <folding>
+            <element signature="e#239#240#0" expanded="true" />
+            <element signature="e#269#270#0" expanded="true" />
+            <element signature="e#335#336#0" expanded="true" />
+            <element signature="e#372#373#0" expanded="true" />
+            <element signature="e#422#423#0" expanded="true" />
+            <element signature="e#450#451#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnpackException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
+          <folding>
+            <element signature="e#228#229#0" expanded="true" />
+            <element signature="e#258#259#0" expanded="true" />
+            <element signature="e#321#322#0" expanded="true" />
+            <element signature="e#358#359#0" expanded="true" />
+            <element signature="e#405#406#0" expanded="true" />
+            <element signature="e#433#434#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/MyZipEntry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="50" column="58" selection-start-line="50" selection-start-column="58" selection-end-line="50" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="29" column="27" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
+        <state relative-caret-position="49">
+          <caret line="103" column="33" selection-start-line="103" selection-start-column="33" selection-end-line="103" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnPackUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2560">
-          <caret line="154" column="5" selection-start-line="154" selection-start-column="5" selection-end-line="154" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnPackHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/BitBuff.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="71" column="30" selection-start-line="71" selection-start-column="30" selection-end-line="71" selection-end-column="30" />
+        <state relative-caret-position="-712">
+          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnPackHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="155" column="43" selection-start-line="155" selection-start-column="43" selection-end-line="155" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tencent/mobile/main/com/tencent/mobile/zip/UnPackUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="203" column="57" selection-start-line="203" selection-start-column="57" selection-end-line="203" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6409#6410#0" expanded="true" />
+            <element signature="e#6455#6456#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

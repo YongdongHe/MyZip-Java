@@ -148,13 +148,83 @@ public class UnPackUtils {
         return map_cll;
     }
 
-    public static BitBuff getInfatingBinary(BitBuff bitBuff,int huffman_code_len){
+    public static HashMap<BitBuff,Integer> getMapOfCL1(int[] cl1s){
+        //cl1s中出现的最大值（huffman的高度）
+        int MAX_BITS = getMaxValue(cl1s);
+        //对huffman树每层叶子节点进行统计
+        int[] bl_count = new int[MAX_BITS + 1];
+        for (int i = 0;i<cl1s.length;i++){
+            bl_count[cl1s[i]] ++;
+        }
+        //当前层最左边的叶子节点的码字的值
+        int code = 0;
+        //将对0的统计清空
+        bl_count[0] = 0;
+        //存储每一层最左边的叶子节点的码字
+        int[] next_code = new int[MAX_BITS + 1];
+
+        for (int i = 1; i < MAX_BITS + 1;i++){
+            code = (code + bl_count[i-1]) << 1;
+            next_code[i] = code;
+        }
+
+        HashMap<BitBuff,Integer> map_cll = new HashMap<>();
+
+        for (int i = 0; i < cl1s.length ; i++ ){
+            //n为第i项cll所表示的码字长度
+            int n_clen = cl1s[i];
+            if (n_clen != 0){
+                if ( i <= 256 ){
+                    //表示是literal
+                    BitBuff huffman_code = getInfatingBinary(BitBuff.convert(next_code[n_clen]),n_clen);
+                    map_cll.put(huffman_code,i);
+                    next_code[n_clen] ++;
+                }else {
+                    //表示是length，需要按照分区编码还原
+                    int[] length_group = LENGTH_GROUP_CODE[i-257];
+                    for (int j = 0;j<length_group.length;j++){
+                        int len = length_group[j];
+                        BitBuff huffman_code = getInfatingBinary(BitBuff.convert(next_code[n_clen]),n_clen).append(getExtraBitsOfLength(len).reverse());
+                        map_cll.put(huffman_code, len + 254 );
+                    }
+                    next_code[n_clen] ++;
+                }
+            }
+        }
+        return map_cll;
+    }
+
+    private static BitBuff getInfatingBinary(BitBuff bitBuff,int huffman_code_len){
+        //在bitBuff前面填充0，直到其位数为huffman_code_len
         int inflating_zeros = huffman_code_len - bitBuff.getBuffLength();
         bitBuff.insertBits(0,false,inflating_zeros);
         return bitBuff;
     }
 
-    public static int getMaxValue(int[] values){
+    private static BitBuff getExtraBitsOfLength(int len){
+        if (inRange(len,3,11)){
+            return new BitBuff();
+        }else if (inRange(len,11,19)){
+            return BitBuff.convert((1-len%2));
+        }else if (inRange(len,19,35)){
+            return getInfatingBinary(BitBuff.convert((len-19)%4),2);
+        }else if (inRange(len,35,97)){
+            return getInfatingBinary(BitBuff.convert((len-35)%8),3);
+        }else if (inRange(len,47,131)){
+            return getInfatingBinary(BitBuff.convert((len-47)%16),4);
+        }else if (inRange(len,131,258)){
+            return getInfatingBinary(BitBuff.convert((len-131)%32),5);
+        }
+        return new BitBuff();
+    }
+
+    private static boolean inRange(int num,int bot,int top){
+        return num >= bot && num < top;
+    }
+
+
+
+    private static int getMaxValue(int[] values){
         int max = values[0];
         for (int i = 0;i<values.length;i++){
             if (max < values[i] ) max = values[i];
@@ -168,5 +238,15 @@ public class UnPackUtils {
         }
     }
 
+    public static void printHuffman1Table(HashMap<BitBuff,Integer> map){
+        for (BitBuff key : map.keySet()){
+            if (map.get(key) <256){
+                System.out.println(String.format("%s -> %s",key.toString(),(char)map.get(key).intValue()));
+            }else {
+                System.out.println(String.format("%s -> %d",key.toString(),map.get(key)));
+            }
+
+        }
+    }
 
 }

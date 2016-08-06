@@ -48,7 +48,7 @@ public class MyZipEntry implements MyZipConstants{
         this.file = file;
     }
 
-    public void unpack()throws IOException{
+    public void unpack()throws IOException,UnpackException{
         if (unPackHelper == null)
             unPackHelper = new UnPackHelper(file,startPosition + getHeaderLength(),compressedSize);
         unPackHelper.unpack();

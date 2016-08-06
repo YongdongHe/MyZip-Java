@@ -76,6 +76,10 @@ public class BitBuff extends BitSet {
 
     public static BitBuff convert(int value) {
         BitBuff bits = new BitBuff();
+        if (value == 0){
+            bits.append(false);
+            return bits;
+        }
         while (value != 0) {
             if (value % 2 != 0) {
                 bits.append(true);
@@ -127,6 +131,13 @@ public class BitBuff extends BitSet {
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        if (!(obj instanceof BitBuff))
+            return false;
+        if (this.getBuffLength() != ((BitBuff) obj).getBuffLength())
+            return false;
+        for (int i = 0;i<this.length();i++){
+            if (this.get(i) != ((BitBuff) obj).get(i))return false;
+        }
+        return true;
     }
 }

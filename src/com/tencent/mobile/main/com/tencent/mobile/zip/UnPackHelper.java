@@ -60,7 +60,7 @@ public class UnPackHelper {
     }
 
 
-    public void unpack(){
+    public void unpack()throws UnpackException{
         buff.clear();
         HEADER.append(getBit(3));
         if ( HEADER.get(2) && !HEADER.get(1)){
@@ -73,7 +73,7 @@ public class UnPackHelper {
         }
     }
 
-    private void dynamicHuffmanUnPack(){
+    private void dynamicHuffmanUnPack()throws UnpackException{
 
         HLIT = new BitBuff().append(getBit(5)).reverse().getValue() + 257;
         System.out.println("HLIT" + HLIT);
@@ -84,14 +84,15 @@ public class UnPackHelper {
         HCLEN = new BitBuff().append(getBit(4)).reverse().getValue() + 4;
         System.out.println("HCLEN" + HCLEN);
         initCLL(HCLEN);
+        initCL1(HLIT);
     }
 
-    private void initCLL(int cll_length){
+    private void initCLL(int cl1_num){
         buff.clear();
-        //获得cll序列，总共
+        //获得cll序列，总共19项
         int[] clls = new int[19];
         Logln("CLL:");
-        for (int i = 0;i<cll_length;i++){
+        for (int i = 0;i<cl1_num;i++){
             buff.clear();
             buff.append(getBit(3)).reverse();
             clls[i] = buff.getValue();
@@ -102,6 +103,69 @@ public class UnPackHelper {
         huffman3 = UnPackUtils.getMapOfCCL(currentClls);
         Logln("\nCLL Huffman Hash Map:\n");
         UnPackUtils.printHuffmanTable(huffman3);
+    }
+
+
+    private void initCL1(int cl1_num)throws UnpackException{
+        BitBuff flag = new BitBuff();
+        buff.clear();
+        int cl1_count = 0;
+        int[] cl1s = new int[cl1_num];
+        try{
+            while(cl1_count < cl1_num){
+                buff.append(getBit(1));
+                if (huffman3.containsKey(buff)){
+                    //已在huffman叶子节点命中
+                    int cl1_value = huffman3.get(buff);
+                    if (16 == cl1_value){
+                        //如果是16的话，后两位记载了cl1_value的重复次数
+                        flag.clear();
+                        flag.append(getBit(2)).reverse();
+                        int repeat_value = cl1s[cl1_count-1];
+                        int repeat_times = 3 + flag.getValue();
+                        for (int i = cl1_count;i < cl1_count + repeat_times ; i++){
+                            cl1s[i] = repeat_value;
+                        }
+                        cl1_count += repeat_times;
+                    }else if (17 == cl1_value){
+                        flag.clear();
+                        flag.append(getBit(3)).reverse();
+                        int repeat_value = 0;
+                        int repeat_times = 3 + flag.getValue();
+                        for (int i = cl1_count; i <cl1_count + repeat_times; i++){
+                            cl1s[i] = repeat_value;
+                        }
+                        cl1_count += repeat_times;
+                    }else if (18 == cl1_value){
+                        flag.clear();
+                        flag.append(getBit(7)).reverse();
+                        int repeat_value = 0;
+                        int repeat_times = 11 + flag.getValue();
+                        for (int i = cl1_count; i <cl1_count + repeat_times; i++){
+                            cl1s[i] = repeat_value;
+                        }
+                        cl1_count += repeat_times;
+                    }else {
+                        cl1s[cl1_count] = cl1_value;
+                        cl1_count += 1;
+                    }
+                    buff.clear();
+                }
+            }
+            Logln("\n" + Arrays.toString(cl1s));
+            huffman1 = UnPackUtils.getMapOfCL1(cl1s);
+            Logln("\nCL1 Huffman Hash Map:\n");
+            UnPackUtils.printHuffman1Table(huffman1);
+        }catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
+            throw new UnpackException("Wrong cl1 arrays");
+        }
+
+    }
+
+
+    private void initCL2(int cl2_length){
+
     }
 
 

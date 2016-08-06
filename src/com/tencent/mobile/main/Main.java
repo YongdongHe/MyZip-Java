@@ -100,6 +100,8 @@ public class Main {
             file.close();
         } catch (ZipFormatException e) {
             e.printStackTrace();
+        } catch (UnpackException e1){
+            e1.printStackTrace();
         }
 //        System.out.println("*******");
 //        ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream("./yyb.zip"));

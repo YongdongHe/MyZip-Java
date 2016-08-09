@@ -279,7 +279,9 @@ public class UnPackUtils {
             return getInfatingBinary(BitBuff.convert((len-257)%128),7);
         }else if (inRange(len,513,1025)){
             return getInfatingBinary(BitBuff.convert((len-513)%256),8);
-        }else if (inRange(len,2049,4097)){
+        }else if(inRange(len,1025,2049)){
+            return getInfatingBinary(BitBuff.convert((len-513)%512),9);
+        } else if (inRange(len,2049,4097)){
             return getInfatingBinary(BitBuff.convert((len-2049)%1024),10);
         }else if (inRange(len,4097,8193)){
             return getInfatingBinary(BitBuff.convert((len-4097)%2048),11);
@@ -312,7 +314,7 @@ public class UnPackUtils {
             FileOutputStream out = new FileOutputStream(new File("./huffmancode3.txt"));
             for (BitBuff key : map.keySet()){
                 String log = String.format(" %s -> %d \n",key.toString(),map.get(key));
-                System.out.println(log);
+//                System.out.println(log);
                 out.write(log.getBytes());
                 out.flush();
             }
@@ -331,7 +333,7 @@ public class UnPackUtils {
             FileOutputStream out = new FileOutputStream(new File("./huffmancode2.txt"));
             for (BitBuff key : map.keySet()){
                 String log = String.format(" %s -> %d \n",key.toString(),map.get(key));
-                System.out.println(log);
+//                System.out.println(log);
                 out.write(log.getBytes());
                 out.flush();
             }
@@ -349,7 +351,7 @@ public class UnPackUtils {
             FileOutputStream out = new FileOutputStream(new File("./huffmancode1.txt"));
             for (BitBuff key : map.keySet()){
                 String log = String.format(" %s -> %d \n",key.toString(),map.get(key));
-                System.out.println(log);
+//                System.out.println(log);
 
             }
             for (BitBuff key : map.keySet()){

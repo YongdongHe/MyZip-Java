@@ -134,6 +134,7 @@ public class UnPackHelper {
                     }else {
                         throw new UnpackException("A value bigger than 256,but not a distance");
                     }
+                    buff.clear();
                 }
             }
         }catch (IOException e){
@@ -169,7 +170,7 @@ public class UnPackHelper {
         ArrayList<Byte> outputValues = new ArrayList<>();
         //此处可能有length超过distance的情况
         for (int i=0;i<length;i++){
-            outputValues.add(dictionary.get(startIndex + length%distance));
+            outputValues.add(dictionary.get(startIndex + (i % distance) ));
         }
         for (Byte value : outputValues){
             outputByte((int)value);

@@ -1,1 +1,1 @@
-Y
+YYB is an android application market, also called myapp. It contains huge amounts of download and application information.

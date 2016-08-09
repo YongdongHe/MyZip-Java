@@ -194,6 +194,44 @@ public class UnPackUtils {
         return map_cll;
     }
 
+    public static HashMap<BitBuff,Integer> getMapOfCL2(int[] cl2s){
+        //cl1s中出现的最大值（huffman的高度）
+        int MAX_BITS = getMaxValue(cl2s);
+        //对huffman树每层叶子节点进行统计
+        int[] bl_count = new int[MAX_BITS + 1];
+        for (int i = 0;i<cl2s.length;i++){
+            bl_count[cl2s[i]] ++;
+        }
+        //当前层最左边的叶子节点的码字的值
+        int code = 0;
+        //将对0的统计清空
+        bl_count[0] = 0;
+        //存储每一层最左边的叶子节点的码字
+        int[] next_code = new int[MAX_BITS + 1];
+
+        for (int i = 1; i < MAX_BITS + 1;i++){
+            code = (code + bl_count[i-1]) << 1;
+            next_code[i] = code;
+        }
+
+        HashMap<BitBuff,Integer> map_cl2 = new HashMap<>();
+
+        for (int i = 0; i < cl2s.length ; i++ ){
+            //n为第i项cll所表示的码字长度
+            int n_clen = cl2s[i];
+            if (n_clen != 0){
+                int[] distance_group = DISTANCE_GROUP_CODE[i];
+                for (int j = 0;j<distance_group.length;j++){
+                    int distance = distance_group[j];
+                    BitBuff huffman_code = getInfatingBinary(BitBuff.convert(next_code[n_clen]),n_clen).append(getExtraBitsOfDistance(distance).reverse());
+                    map_cl2.put(huffman_code, distance );
+                }
+                next_code[n_clen] ++;
+            }
+        }
+        return map_cl2;
+    }
+
     private static BitBuff getInfatingBinary(BitBuff bitBuff,int huffman_code_len){
         //在bitBuff前面填充0，直到其位数为huffman_code_len
         int inflating_zeros = huffman_code_len - bitBuff.getBuffLength();
@@ -217,6 +255,39 @@ public class UnPackUtils {
         }
         return new BitBuff();
     }
+
+    private static BitBuff getExtraBitsOfDistance(int len){
+        if (inRange(len,1,5)){
+            return new BitBuff();
+        }else if (inRange(len,5,9)){
+            return BitBuff.convert((1-len%2));
+        }else if (inRange(len,9,17)){
+            return getInfatingBinary(BitBuff.convert((len-9)%4),2);
+        }else if (inRange(len,17,33)){
+            return getInfatingBinary(BitBuff.convert((len-17)%8),3);
+        }else if (inRange(len,33,65)){
+            return getInfatingBinary(BitBuff.convert((len-33)%16),4);
+        }else if (inRange(len,65,129)){
+            return getInfatingBinary(BitBuff.convert((len-65)%32),5);
+        }else if (inRange(len,129,257)){
+            return getInfatingBinary(BitBuff.convert((len-129)%64),6);
+        }else if (inRange(len,257,513)){
+            return getInfatingBinary(BitBuff.convert((len-257)%128),7);
+        }else if (inRange(len,513,1025)){
+            return getInfatingBinary(BitBuff.convert((len-513)%256),8);
+        }else if (inRange(len,2049,4097)){
+            return getInfatingBinary(BitBuff.convert((len-2049)%1024),10);
+        }else if (inRange(len,4097,8193)){
+            return getInfatingBinary(BitBuff.convert((len-4097)%2048),11);
+        }else if (inRange(len,8193,16385)){
+            return getInfatingBinary(BitBuff.convert((len-8193)%4096),12);
+        }else if (inRange(len,16385,32768)){
+            return getInfatingBinary(BitBuff.convert((len-16385)%8192),13);
+        }
+        return new BitBuff();
+    }
+
+
 
     private static boolean inRange(int num,int bot,int top){
         return num >= bot && num < top;

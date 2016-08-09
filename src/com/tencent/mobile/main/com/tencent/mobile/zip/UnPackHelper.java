@@ -1,51 +1,64 @@
 package com.tencent.mobile.main.com.tencent.mobile.zip;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
+import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 /**
  * Created by realhe on 2016/8/1.
  */
 public class UnPackHelper {
-    File file;
+    //对应的zip文件
+    private File file;
+    //解压时需要输出到的目标文件
+    private FileOutputStream out;
     //文件的压缩数据段开始的位置
-    long startPosition;
+    private long startPosition;
     //文件压缩数据段大小
-    long compressedSize;
+    private long compressedSize;
+
+
 
     //用于映射文件的压缩数据部分
-    MappedByteBuffer mappedByteBuffer;
+    private MappedByteBuffer mappedByteBuffer;
     //用于记录文件缓冲区中的数据在文件数据段中的位置
     //TODO  大文件时应该改成long
-    int dataIndex = 0;
+    private int dataIndex = 0;
     //用于存放从文件中读取的压缩数据段，称为文件缓冲区
-    byte[] dataBuff;
+    private byte[] dataBuff;
     //文件缓冲区的大小
-    int DATA_BUFF_SIZE = 1024;
+    private int DATA_BUFF_SIZE = 1024;
 
 
     //用于存放当前取出的bit位，对照huffman码表进行解码
-    BitBuff buff;
+    private BitBuff buff;
 
     //用于存放FileData头
-    BitBuff HEADER = new BitBuff();
-    int HLIT;
-    int HDIST;
-    int HCLEN;
+    private BitBuff HEADER = new BitBuff();
+    private int HLIT;
+    private int HDIST;
+    private int HCLEN;
 
     //动态huffman解码时所需的解码树
 
     //CL1
-    HashMap<BitBuff,Integer> huffman1;
+    private HashMap<BitBuff,Integer> huffman1;
     //CL2
-    HashMap<BitBuff,Integer> huffman2;
+    private HashMap<BitBuff,Integer> huffman2;
     //CLL
-    HashMap<BitBuff,Integer> huffman3;
+    private HashMap<BitBuff,Integer> huffman3;
+
+    //32KB大小的字典
+    public static int deflateDicSize = 32768;
+    public static int outputBuffSize = 1;
+    private LinkedList<Byte> dictionary;
+    private int dic_element_num = 0;
+    private ByteBuffer outputBuff;
 
 
     public UnPackHelper(File file, long startPosition, long compressedSize) throws IOException {
@@ -60,7 +73,14 @@ public class UnPackHelper {
     }
 
 
-    public void unpack()throws UnpackException{
+    public void unpack()throws UnpackException,FileNotFoundException{
+        //解压前的初始化工作
+        String name = "yyb.txt";
+        String outPath = "./";
+        out = new FileOutputStream(new File(outPath + name));
+        dictionary = new LinkedList<>();
+        outputBuff = ByteBuffer.allocate(outputBuffSize);
+
         buff.clear();
         HEADER.append(getBit(3));
         if ( HEADER.get(2) && !HEADER.get(1)){
@@ -72,6 +92,8 @@ public class UnPackHelper {
             //HEADER = 00 直接存储
         }
     }
+
+
 
     private void dynamicHuffmanUnPack()throws UnpackException{
 
@@ -85,6 +107,73 @@ public class UnPackHelper {
         System.out.println("HCLEN" + HCLEN);
         initCLL(HCLEN);
         initCL1(HLIT);
+        initCL2(HDIST);
+
+        buff.clear();
+        try{
+            while(true){
+                buff.append(getBit());
+                if (huffman1.containsKey(buff)){
+                    int value = huffman1.get(buff);
+                    if (256 == value){
+                        Logln("end");
+                        break;
+                    }else if (value < 256){
+                        //说明是literal，直接输出
+                        outputByte(value);
+                    }else if (value >= 257 && value <= 512){
+                        //说明是length
+                        int v_length = value - 254;
+                        BitBuff dst_buff = new BitBuff();
+                        while(!huffman2.containsKey(dst_buff)){
+                            //一直取，直到dst_buff可以解码为一个距离
+                            dst_buff.append(getBit());
+                        }
+                        int v_distance = huffman2.get(dst_buff);
+                        outputByteWithDistanceAndLength(v_distance,v_length);
+                    }else {
+                        throw new UnpackException("A value bigger than 256,but not a distance");
+                    }
+                }
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    private void outputByte(int value)throws IOException{
+        if (256 ==  value){
+            out.write(outputBuff.array());
+            outputBuff.clear();
+        }
+        if (value > 127)
+            value = value -256;
+        outputBuff.put((byte)value);
+        dictionary.offer((byte)value);
+        dic_element_num ++;
+        if (dic_element_num > deflateDicSize){
+            dictionary.peek();
+            dic_element_num --;
+        }
+        if (outputBuff.remaining() == 0){
+            out.write(outputBuff.array());
+            outputBuff.clear();
+        }
+    }
+
+    private void outputByteWithDistanceAndLength(int distance , int length)throws UnpackException,IOException{
+        if ( distance > dic_element_num )
+            throw new UnpackException("Distance beyonds the size of dictionary.");
+        int startIndex = dic_element_num - distance;
+        ArrayList<Byte> outputValues = new ArrayList<>();
+        //此处可能有length超过distance的情况
+        for (int i=0;i<length;i++){
+            outputValues.add(dictionary.get(startIndex + length%distance));
+        }
+        for (Byte value : outputValues){
+            outputByte((int)value);
+        }
     }
 
     private void initCLL(int cl1_num){
@@ -107,12 +196,31 @@ public class UnPackHelper {
 
 
     private void initCL1(int cl1_num)throws UnpackException{
+        int[] cl1s = getCL(cl1_num);
+        Logln("\n" + Arrays.toString(cl1s));
+        huffman1 = UnPackUtils.getMapOfCL1(cl1s);
+        Logln("\nCL1 Huffman Hash Map:\n");
+        UnPackUtils.printHuffman1Table(huffman1);
+    }
+
+
+
+    private void initCL2(int cl2_num)throws UnpackException{
+        int[] cl2s = getCL(cl2_num);
+        Logln("\n" + Arrays.toString(cl2s));
+        huffman2 = UnPackUtils.getMapOfCL2(cl2s);
+        Logln("\nCL2 Huffman Hash Map:\n");
+        UnPackUtils.printHuffmanTable(huffman2);
+    }
+
+
+    private int[] getCL(int cl_num)throws UnpackException{
         BitBuff flag = new BitBuff();
         buff.clear();
-        int cl1_count = 0;
-        int[] cl1s = new int[cl1_num];
+        int cl_count = 0;
+        int[] cls = new int[cl_num];
         try{
-            while(cl1_count < cl1_num){
+            while(cl_count < cl_num){
                 buff.append(getBit(1));
                 if (huffman3.containsKey(buff)){
                     //已在huffman叶子节点命中
@@ -121,54 +229,43 @@ public class UnPackHelper {
                         //如果是16的话，后两位记载了cl1_value的重复次数
                         flag.clear();
                         flag.append(getBit(2)).reverse();
-                        int repeat_value = cl1s[cl1_count-1];
+                        int repeat_value = cls[cl_count-1];
                         int repeat_times = 3 + flag.getValue();
-                        for (int i = cl1_count;i < cl1_count + repeat_times ; i++){
-                            cl1s[i] = repeat_value;
+                        for (int i = cl_count;i < cl_count + repeat_times ; i++){
+                            cls[i] = repeat_value;
                         }
-                        cl1_count += repeat_times;
+                        cl_count += repeat_times;
                     }else if (17 == cl1_value){
                         flag.clear();
                         flag.append(getBit(3)).reverse();
                         int repeat_value = 0;
                         int repeat_times = 3 + flag.getValue();
-                        for (int i = cl1_count; i <cl1_count + repeat_times; i++){
-                            cl1s[i] = repeat_value;
+                        for (int i = cl_count; i <cl_count + repeat_times; i++){
+                            cls[i] = repeat_value;
                         }
-                        cl1_count += repeat_times;
+                        cl_count += repeat_times;
                     }else if (18 == cl1_value){
                         flag.clear();
                         flag.append(getBit(7)).reverse();
                         int repeat_value = 0;
                         int repeat_times = 11 + flag.getValue();
-                        for (int i = cl1_count; i <cl1_count + repeat_times; i++){
-                            cl1s[i] = repeat_value;
+                        for (int i = cl_count; i <cl_count + repeat_times; i++){
+                            cls[i] = repeat_value;
                         }
-                        cl1_count += repeat_times;
+                        cl_count += repeat_times;
                     }else {
-                        cl1s[cl1_count] = cl1_value;
-                        cl1_count += 1;
+                        cls[cl_count] = cl1_value;
+                        cl_count += 1;
                     }
                     buff.clear();
                 }
             }
-            Logln("\n" + Arrays.toString(cl1s));
-            huffman1 = UnPackUtils.getMapOfCL1(cl1s);
-            Logln("\nCL1 Huffman Hash Map:\n");
-            UnPackUtils.printHuffman1Table(huffman1);
+            return cls;
         }catch (IndexOutOfBoundsException e){
             e.printStackTrace();
             throw new UnpackException("Wrong cl1 arrays");
         }
-
     }
-
-
-    private void initCL2(int cl2_length){
-
-    }
-
-
 
 
 
@@ -179,9 +276,6 @@ public class UnPackHelper {
     private void Logln(String logMsg){
         System.out.println(logMsg);
     }
-
-
-
 
 
     //用从字节缓冲区内按低位有限取出，将从0到7循环变化
@@ -220,11 +314,13 @@ public class UnPackHelper {
         if (byteIndex == 0){
             if (mappedByteBuffer.remaining() > DATA_BUFF_SIZE){
                 mappedByteBuffer.get(dataBuff,dataIndex,DATA_BUFF_SIZE);
+                dataIndex += DATA_BUFF_SIZE;
             }
             else{
                 mappedByteBuffer.get(dataBuff,dataIndex,mappedByteBuffer.remaining());
+                dataIndex += mappedByteBuffer.remaining();
             }
-            dataIndex += DATA_BUFF_SIZE;
+
         }
         byte next_byte = dataBuff[byteIndex];
         byteIndex = (byteIndex + 1)%DATA_BUFF_SIZE;

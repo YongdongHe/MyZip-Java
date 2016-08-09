@@ -26,10 +26,15 @@ public class Main {
             //UnZipFunc();
             //DeflaterFunc();
             //System.out.println();
-            BitBuff bitBuff = new BitBuff();
-            bitBuff.insertBits(0,true,3);
-            System.out.println(bitBuff);
-
+            FileOutputStream out = new FileOutputStream("./out.txt");
+            ByteBuffer buffer = ByteBuffer.allocate(3);
+            byte a  = 116;
+            byte b = 75;
+            buffer.put(a);
+            buffer.clear();
+            buffer.put(a);
+            out.write(buffer.array());
+            out.flush();
 
         } catch (IOException e) {
             e.printStackTrace();

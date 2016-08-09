@@ -192,7 +192,7 @@ public class UnPackHelper {
         Logln("\n" + Arrays.toString(currentClls));
         huffman3 = UnPackUtils.getMapOfCCL(currentClls);
         Logln("\nCLL Huffman Hash Map:\n");
-        UnPackUtils.printHuffmanTable(huffman3);
+        UnPackUtils.printHuffman3Table(huffman3);
     }
 
 
@@ -211,7 +211,7 @@ public class UnPackHelper {
         Logln("\n" + Arrays.toString(cl2s));
         huffman2 = UnPackUtils.getMapOfCL2(cl2s);
         Logln("\nCL2 Huffman Hash Map:\n");
-        UnPackUtils.printHuffmanTable(huffman2);
+        UnPackUtils.printHuffman2Table(huffman2);
     }
 
 

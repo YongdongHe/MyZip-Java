@@ -96,7 +96,7 @@ public class Main {
     }
 
     public static void MyZipFunc()throws IOException{
-        MyZipFile file = new MyZipFile("./yyb.zip");
+        MyZipFile file = new MyZipFile("./english.zip");
         try {
             file.parseFile();
             for(MyZipEntry entry : file.entryIndices()){

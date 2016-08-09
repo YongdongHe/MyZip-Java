@@ -1,5 +1,9 @@
 package com.tencent.mobile.main.com.tencent.mobile.zip;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.BitSet;
 import java.util.HashMap;
 
@@ -303,21 +307,68 @@ public class UnPackUtils {
         return max;
     }
 
-    public static void printHuffmanTable(HashMap<BitBuff,Integer> map){
-        for (BitBuff key : map.keySet()){
-            System.out.println(String.format("%s -> %d",key.toString(),map.get(key)));
+    public static void printHuffman3Table(HashMap<BitBuff,Integer> map){
+        try {
+            FileOutputStream out = new FileOutputStream(new File("./huffmancode3.txt"));
+            for (BitBuff key : map.keySet()){
+                String log = String.format(" %s -> %d \n",key.toString(),map.get(key));
+                System.out.println(log);
+                out.write(log.getBytes());
+                out.flush();
+            }
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+
+    }
+
+    public static void printHuffman2Table(HashMap<BitBuff,Integer> map){
+        try {
+            FileOutputStream out = new FileOutputStream(new File("./huffmancode2.txt"));
+            for (BitBuff key : map.keySet()){
+                String log = String.format(" %s -> %d \n",key.toString(),map.get(key));
+                System.out.println(log);
+                out.write(log.getBytes());
+                out.flush();
+            }
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static void printHuffman1Table(HashMap<BitBuff,Integer> map){
-        for (BitBuff key : map.keySet()){
-            if (map.get(key) <256){
-                System.out.println(String.format("%s -> %s",key.toString(),(char)map.get(key).intValue()));
-            }else {
-                System.out.println(String.format("%s -> %d",key.toString(),map.get(key)));
-            }
+        try {
+            FileOutputStream out = new FileOutputStream(new File("./huffmancode1.txt"));
+            for (BitBuff key : map.keySet()){
+                String log = String.format(" %s -> %d \n",key.toString(),map.get(key));
+                System.out.println(log);
 
+            }
+            for (BitBuff key : map.keySet()){
+                String log;
+                if (map.get(key) <256){
+                    log = String.format(" %s -> %s \n",key.toString(),(char)map.get(key).intValue());
+                }else {
+                    log = String.format(" %s -> %d \n",key.toString(),map.get(key));
+                }
+                out.write(log.getBytes());
+                out.flush();
+            }
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 
 }

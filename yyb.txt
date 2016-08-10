@@ -1,10 +1,87 @@
-News Round Up
-by Patrick O,Connor
-A poll published in The Guardian reveals that Winnie-the-Pooh is the UK's favourite childhood book character, just pipping Harry Potter.
-1,200 people who read at least once a week were quizzed.
-George, Enid Blyton¡¯s tomboy adventurer from the Famous Five, was third with The Hobbit¡¯s Bilbo Baggins and Roald Dahl¡¯s Matilda in fourth and fifth places.
-The survey was commissioned by the Reading Agency, which has launched a Summer Reading Challenge for children in libraries across the country.
-¡°We know the power of picking up a book you love and discovering a favourite character ¡­ the Summer Reading Challenge gives children the chance to be transported and inspired by the adventures of their favourite characters, and read books that can go on to play a fundamental role in their lives,¡± said chief executive Sue Wilkinson.
-The Daily Mirror has put the focus on 57 year old Chris King, from Rossington in South Yorkshire, who has become the country's first double hand transplant patient.
-He lost both hands above the thumb joint in a metal-pressing machine accident at work three years ago. Chris said: ¡°They look absolutely tremendous.¡±
-Durham Cathedral will be a big attraction for histo
+Deutsch                      Informational                      [Page 9]
+
+RFC 1951      DEFLATE Compressed Data Format Specification      May 1996
+
+
+         BFINAL is set if and only if this is the last block of the data
+         set.
+
+         BTYPE specifies how the data are compressed, as follows:
+
+            00 - no compression
+            01 - compressed with fixed Huffman codes
+            10 - compressed with dynamic Huffman codes
+            11 - reserved (error)
+
+         The only difference between the two compressed cases is how the
+         Huffman codes for the literal/length and distance alphabets are
+         defined.
+
+         In all cases, the decoding algorithm for the actual data is as
+         follows:
+
+            do
+               read block header from input stream.
+               if stored with no compression
+                  skip any remaining bits in current partially
+                     processed byte
+                  read LEN and NLEN (see next section)
+                  copy LEN bytes of data to output
+               otherwise
+                  if compressed with dynamic Huffman codes
+                     read representation of code trees (see
+                        subsection below)
+                  loop (until end of block code recognized)
+                     decode literal/length value from input stream
+                     if value < 256
+                        copy value (literal byte) to output stream
+                     otherwise
+                        if value = end of block (256)
+                           break from loop
+                        otherwise (value = 257..285)
+                           decode distance from input stream
+
+                           move backwards distance bytes in the output
+                           stream, and copy length bytes from this
+                           position to the output stream.
+                  end loop
+            while not last block
+
+         Note that a duplicated string reference may refer to a string
+         in a previous block; i.e., the backward distance may cross one
+         or more block boundaries.  However a distance cannot refer past
+         the beginning of the output stream.  (An application using a
+
+
+
+Deutsch                      Informational                     [Page 10]
+
+RFC 1951      DEFLATE Compressed Data Format Specification      May 1996
+
+
+         preset dictionary might discard part of the output stream; a
+         distance can refer to that part of the output stream anyway)
+         Note also that the referenced string may overlap the current
+         position; for example, if the last 2 bytes decoded have values
+         X and Y, a string reference with <length = 5, distance = 2>
+         adds X,Y,X,Y,X to the output stream.
+
+         We now specify each compression method in turn.
+
+      3.2.4. Non-compressed blocks (BTYPE=00)
+
+         Any bits of input up to the next byte boundary are ignored.
+         The rest of the block consists of the following information:
+
+              0   1   2   3   4...
+            +---+---+---+---+================================+
+            |  LEN  | NLEN  |... LEN bytes of literal data...|
+            +---+---+---+---+================================+
+
+         LEN is the number of data bytes in the block.  NLEN is the
+         one's complement of LEN.
+
+      3.2.5. Compressed blocks (length and distance codes)
+
+         As noted above, encoded data blocks in the "deflate" format
+         consist of sequences of s

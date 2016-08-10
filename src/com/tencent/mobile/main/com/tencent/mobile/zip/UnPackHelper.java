@@ -26,9 +26,6 @@ public class UnPackHelper {
 
     //用于映射文件的压缩数据部分
     private MappedByteBuffer mappedByteBuffer;
-    //用于记录文件缓冲区中的数据在文件数据段中的位置
-    //TODO  大文件时应该改成long
-    private int dataIndex = 0;
     //用于存放从文件中读取的压缩数据段，称为文件缓冲区
     private byte[] dataBuff;
     //文件缓冲区的大小
@@ -69,7 +66,6 @@ public class UnPackHelper {
                 .getChannel().map(FileChannel.MapMode.READ_ONLY,startPosition,compressedSize);
         dataBuff = new byte[DATA_BUFF_SIZE];
         buff = new BitBuff();
-        dataIndex = 0;
     }
 
 
@@ -151,6 +147,7 @@ public class UnPackHelper {
         if (value > 127)
             value = value -256;
         outputBuff.put((byte)value);
+        System.out.print((char)value);
         dictionary.offer((byte)value);
         dic_element_num ++;
         if (dic_element_num > deflateDicSize){
@@ -312,19 +309,25 @@ public class UnPackHelper {
 
     //从文件缓冲区中获得一个字节
     private byte getByte(){
+        //TODO  对compressedSize超出int表示范围时仍需要修改
         if (byteIndex == 0){
-            if (mappedByteBuffer.remaining() > DATA_BUFF_SIZE){
-                mappedByteBuffer.get(dataBuff,dataIndex,DATA_BUFF_SIZE);
-                dataIndex += DATA_BUFF_SIZE;
+            long remaining = mappedByteBuffer.remaining();
+            if (remaining > DATA_BUFF_SIZE){
+                dataBuff = new byte[DATA_BUFF_SIZE];
             }
             else{
-                mappedByteBuffer.get(dataBuff,dataIndex,mappedByteBuffer.remaining());
-                dataIndex += mappedByteBuffer.remaining();
+                //remaining已经小于DATA_BUFF_SIZE了
+                dataBuff = new byte[(int)remaining];
+            }
+            try{
+                mappedByteBuffer.get(dataBuff,0,dataBuff.length);
+            }catch (IndexOutOfBoundsException e){
+                e.printStackTrace();
             }
 
         }
         byte next_byte = dataBuff[byteIndex];
-        byteIndex = (byteIndex + 1)%DATA_BUFF_SIZE;
+        byteIndex = (byteIndex + 1)%dataBuff.length;
         return next_byte;
     }
 

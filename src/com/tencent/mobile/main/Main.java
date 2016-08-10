@@ -26,19 +26,12 @@ public class Main {
             //UnZipFunc();
             //DeflaterFunc();
             //System.out.println();
-            FileOutputStream out = new FileOutputStream("./out.txt");
-            ByteBuffer buffer = ByteBuffer.allocate(3);
-            byte a  = 116;
-            byte b = 75;
-            buffer.put(a);
-            buffer.clear();
-            buffer.put(a);
-            out.write(buffer.array());
-            out.flush();
+
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     public static void ZipFunc()throws IOException{
@@ -96,7 +89,7 @@ public class Main {
     }
 
     public static void MyZipFunc()throws IOException{
-        MyZipFile file = new MyZipFile("./english.zip");
+        MyZipFile file = new MyZipFile("./deflate.zip");
         try {
             file.parseFile();
             for(MyZipEntry entry : file.entryIndices()){

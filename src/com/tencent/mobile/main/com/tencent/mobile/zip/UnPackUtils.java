@@ -250,10 +250,10 @@ public class UnPackUtils {
             return BitBuff.convert((1-len%2));
         }else if (inRange(len,19,35)){
             return getInfatingBinary(BitBuff.convert((len-19)%4),2);
-        }else if (inRange(len,35,97)){
+        }else if (inRange(len,35,67)){
             return getInfatingBinary(BitBuff.convert((len-35)%8),3);
-        }else if (inRange(len,47,131)){
-            return getInfatingBinary(BitBuff.convert((len-47)%16),4);
+        }else if (inRange(len,67,131)){
+            return getInfatingBinary(BitBuff.convert((len-67)%16),4);
         }else if (inRange(len,131,258)){
             return getInfatingBinary(BitBuff.convert((len-131)%32),5);
         }
@@ -279,9 +279,9 @@ public class UnPackUtils {
             return getInfatingBinary(BitBuff.convert((len-257)%128),7);
         }else if (inRange(len,513,1025)){
             return getInfatingBinary(BitBuff.convert((len-513)%256),8);
-        }else if(inRange(len,1025,2049)){
-            return getInfatingBinary(BitBuff.convert((len-513)%512),9);
-        } else if (inRange(len,2049,4097)){
+        }else if (inRange(len,1025,2049)){
+            return getInfatingBinary(BitBuff.convert((len-1025)%512),9);
+        }else if (inRange(len,2049,4097)){
             return getInfatingBinary(BitBuff.convert((len-2049)%1024),10);
         }else if (inRange(len,4097,8193)){
             return getInfatingBinary(BitBuff.convert((len-4097)%2048),11);

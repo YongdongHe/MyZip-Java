@@ -78,14 +78,22 @@ public class UnPackHelper {
         outputBuff = ByteBuffer.allocate(outputBuffSize);
 
         buff.clear();
-        HEADER.append(getBit(3));
-        if ( HEADER.get(2) && !HEADER.get(1)){
-            //HEADER = 10 动态huffman
-            dynamicHuffmanUnPack();
-        }else if (!HEADER.get(2) || HEADER.get(1)){
-            //HEADER = 01 静态huffman
-        }else if (!HEADER.get(2) || !HEADER.get(1)){
-            //HEADER = 00 直接存储
+        boolean isEnd = false;
+        while (!isEnd){
+            HEADER.clear();
+            HEADER.append(getBit(3));
+            if(HEADER.get(0)){
+                //HEADER第一位是1时，说明是最后一个数据段,本次解码后便结束解码
+                isEnd = true;
+            }
+            if ( HEADER.get(2) && !HEADER.get(1)){
+                //HEADER = 10 动态huffman
+                dynamicHuffmanUnPack();
+            }else if (!HEADER.get(2) || HEADER.get(1)){
+                //HEADER = 01 静态huffman
+            }else if (!HEADER.get(2) || !HEADER.get(1)){
+                //HEADER = 00 直接存储
+            }
         }
     }
 
@@ -136,6 +144,7 @@ public class UnPackHelper {
         }catch (IOException e){
             e.printStackTrace();
         }
+
 
     }
 
@@ -326,9 +335,14 @@ public class UnPackHelper {
             }
 
         }
-        byte next_byte = dataBuff[byteIndex];
-        byteIndex = (byteIndex + 1)%dataBuff.length;
-        return next_byte;
+        try{
+            byte next_byte = dataBuff[byteIndex];
+            byteIndex = (byteIndex + 1)%dataBuff.length;
+            return next_byte;
+        }catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
+        return 0x00;
     }
 
 }

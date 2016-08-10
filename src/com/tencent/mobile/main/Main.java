@@ -89,7 +89,7 @@ public class Main {
     }
 
     public static void MyZipFunc()throws IOException{
-        MyZipFile file = new MyZipFile("./deflate.zip");
+        MyZipFile file = new MyZipFile("./rfc.zip");
         try {
             file.parseFile();
             for(MyZipEntry entry : file.entryIndices()){

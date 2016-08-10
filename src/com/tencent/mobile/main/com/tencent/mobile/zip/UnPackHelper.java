@@ -51,8 +51,8 @@ public class UnPackHelper {
     private HashMap<BitBuff,Integer> huffman3;
 
     //32KB大小的字典
-    public static int deflateDicSize = 32768;
-    public static int outputBuffSize = 1;
+    public static final int deflateDicSize = 32768;
+    public static final int outputBuffSize = 1;
     private LinkedList<Byte> dictionary;
     private int dic_element_num = 0;
     private ByteBuffer outputBuff;
@@ -71,7 +71,7 @@ public class UnPackHelper {
 
     public void unpack()throws UnpackException,FileNotFoundException{
         //解压前的初始化工作
-        String name = "yyb.txt";
+        String name = "rfc.txt";
         String outPath = "./";
         out = new FileOutputStream(new File(outPath + name));
         dictionary = new LinkedList<>();
@@ -134,6 +134,9 @@ public class UnPackHelper {
                             dst_buff.append(getBit());
                         }
                         int v_distance = huffman2.get(dst_buff);
+                        if (v_distance == 1707){
+                            int a = 0;
+                        }
                         outputByteWithDistanceAndLength(v_distance,v_length);
                     }else {
                         throw new UnpackException("A value bigger than 256,but not a distance");
@@ -156,13 +159,21 @@ public class UnPackHelper {
         if (value > 127)
             value = value -256;
         outputBuff.put((byte)value);
-        System.out.print((char)value);
+//        System.out.print((char)value);
         dictionary.offer((byte)value);
-        dic_element_num ++;
-        if (dic_element_num > deflateDicSize){
-            dictionary.peek();
-            dic_element_num --;
+        dic_element_num += 1;
+        if (dic_element_num == 32765){
+            int b = 1;
         }
+        while (dic_element_num >= deflateDicSize){
+            dictionary.poll();
+            dic_element_num -= 1;
+        }
+        if (dic_element_num != dictionary.size()){
+            int a = 1;
+        }
+        System.out.println(dictionary.size());
+        System.out.println(dic_element_num);
         if (outputBuff.remaining() == 0){
             out.write(outputBuff.array());
             outputBuff.clear();

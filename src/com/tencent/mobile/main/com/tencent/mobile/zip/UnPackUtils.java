@@ -287,7 +287,7 @@ public class UnPackUtils {
             return getInfatingBinary(BitBuff.convert((len-4097)%2048),11);
         }else if (inRange(len,8193,16385)){
             return getInfatingBinary(BitBuff.convert((len-8193)%4096),12);
-        }else if (inRange(len,16385,32768)){
+        }else if (inRange(len,16385,32769)){
             return getInfatingBinary(BitBuff.convert((len-16385)%8192),13);
         }
         return new BitBuff();

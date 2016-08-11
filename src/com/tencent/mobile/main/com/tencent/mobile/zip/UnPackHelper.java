@@ -73,9 +73,9 @@ public class UnPackHelper {
     }
 
 
-    public void unpack()throws UnpackException,FileNotFoundException{
+    public void unpack() throws UnpackException, IOException {
         //解压前的初始化工作
-        String name = "largepic.jpg";
+        String name = "pic.jpg";
         String outPath = "./";
         out = new FileOutputStream(new File(outPath + name));
         dictionary = new LinkedList<>();
@@ -106,6 +106,7 @@ public class UnPackHelper {
                 throw new UnpackException("reserved compressed data header(error)");
             }
         }
+        out.close();
     }
 
 
@@ -206,7 +207,26 @@ public class UnPackHelper {
     }
 
     private void nocompressedUnPack()throws UnpackException{
-
+        //skip to next word
+        skipByte();
+        //get the len
+        long LEN = 0x00;
+        byte byte0 = getByte();
+        byte byte1 = getByte();
+        byte byte2 = getByte();
+        byte byte3 = getByte();
+        LEN |= byte1;
+        LEN |= (byte0<<8);
+        LEN |= (byte2<<24);
+        LEN |= (byte3<<16);
+        int l = 0;
+        try{
+            for (long num = 0; num < LEN ; num ++){
+                outputStoredByte(getByte());
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     private void outputByte(int value)throws IOException{
@@ -219,6 +239,20 @@ public class UnPackHelper {
         outputBuff.put((byte)value);
 //        System.out.print((char)value);
         dictionary.offer((byte)value);
+        dic_element_num += 1;
+        while (dic_element_num > deflateDicSize){
+            dictionary.poll();
+            dic_element_num -= 1;
+        }
+        if (outputBuff.remaining() == 0){
+            out.write(outputBuff.array());
+            outputBuff.clear();
+        }
+    }
+
+    private void outputStoredByte(byte value)throws IOException{
+        outputBuff.put(value);
+        dictionary.offer(value);
         dic_element_num += 1;
         while (dic_element_num > deflateDicSize){
             dictionary.poll();
@@ -365,6 +399,11 @@ public class UnPackHelper {
         return bit;
     }
 
+    private void skipByte(){
+        //跳过当前字节后面的位数，下一次直接从下个字节开始取
+        bitIndex = 0;
+    }
+
     //从字节缓冲区内获得num个bit
     private boolean[] getBit(int num){
         boolean[] bits = new boolean[num];
@@ -376,7 +415,7 @@ public class UnPackHelper {
 
     //记录下一个从文件缓冲区中被取出的字节的位置
     int byteIndex = 0;
-
+    long totalIndex = 0;
     //从文件缓冲区中获得一个字节
     private byte getByte(){
         //TODO  对compressedSize超出int表示范围时仍需要修改
@@ -385,10 +424,12 @@ public class UnPackHelper {
             remaining = mappedByteBuffer.remaining();
             if (remaining > DATA_BUFF_SIZE){
                 dataBuff = new byte[DATA_BUFF_SIZE];
+                totalIndex += DATA_BUFF_SIZE;
             }
             else{
                 //remaining已经小于DATA_BUFF_SIZE了
                 dataBuff = new byte[(int)remaining];
+                totalIndex += remaining;
             }
             try{
                 mappedByteBuffer.get(dataBuff,0,dataBuff.length);
@@ -403,6 +444,12 @@ public class UnPackHelper {
             return next_byte;
         }catch (IndexOutOfBoundsException e){
             e.printStackTrace();
+            try {
+                out.write(outputBuff.array());
+                out.flush();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
         return 0x00;
     }

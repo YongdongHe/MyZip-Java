@@ -31,9 +31,21 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        BitBuff n = BitBuff.convert(7);
-        BitBuff a = new BitBuff().append(n);
-        System.out.println(a);
+//        long LEN = 0x00;
+//        byte byte0 = 0x01;
+//        byte byte1 = 0x01;
+//        byte byte2 = 0x01;
+//        byte byte3 = 0x01;
+//        LEN |= byte0;
+//        LEN |= (byte1<<8);
+//        LEN |= (byte2<<16);
+//        LEN |= (byte3<<24);
+//        System.out.println(LEN);
+//        byte a =(byte)0xff;
+//        System.out.println(a);
+//        System.out.println((int)a);
+//        int b = 255;
+//        System.out.println((byte)(b-256));
     }
 
     public static void ZipFunc()throws IOException{
@@ -91,7 +103,7 @@ public class Main {
     }
 
     public static void MyZipFunc()throws IOException{
-        MyZipFile file = new MyZipFile("./largepic.zip");
+        MyZipFile file = new MyZipFile("./pic1.zip");
         try {
             file.parseFile();
             for(MyZipEntry entry : file.entryIndices()){

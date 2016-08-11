@@ -239,7 +239,15 @@ public class UnPackUtils {
     private static BitBuff getInfatingBinary(BitBuff bitBuff,int huffman_code_len){
         //在bitBuff前面填充0，直到其位数为huffman_code_len
         int inflating_zeros = huffman_code_len - bitBuff.getBuffLength();
-        bitBuff.insertBits(0,false,inflating_zeros);
+        if (inflating_zeros <= 0){
+            return bitBuff;
+        }
+        try{
+            bitBuff.insertBits(0,false,inflating_zeros);
+        }catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
+
         return bitBuff;
     }
 
@@ -299,7 +307,77 @@ public class UnPackUtils {
         return num >= bot && num < top;
     }
 
+    /**
+     * 获得静态huffman编码的LIT表，length和literal共同进行分组编码
 
+                 Lit Value    Bits        Codes
+                 ---------    ----        -----
+                 0 - 143       8          00110000 through 10111111     (48 到 191)
+                 144 - 255     9          110010000 through 111111111   (400 到 511)
+                 256 - 279     7          0000000 through   0010111     (0 到 23)
+                 280 - 287     8          11000000 through  11000111    (192 到 199)
+     * @return
+     */
+    public static HashMap<BitBuff,Integer> getFixedLitTable(){
+        HashMap<BitBuff,Integer> fiexdLitTable = new HashMap<>();
+        //literal 0 -143
+        for (int i = 0; i <= 143; i++ ){
+
+            fiexdLitTable.put(getInfatingBinary(BitBuff.convert( 48 + i),8),i);
+        }
+        //literal 144 -255
+        for (int i = 144; i <= 255; i++ ){
+
+            fiexdLitTable.put(getInfatingBinary(BitBuff.convert( 256 + i),9),i);
+        }
+        //end symbol 256
+        fiexdLitTable.put(getInfatingBinary(BitBuff.convert(0),7),256);
+        //for length
+        for (int i = 257; i<= 285 ; i++){
+            //表示是length，需要按照分区编码还原
+            int[] length_group = LENGTH_GROUP_CODE[i-257];
+            BitBuff group_code;
+            if ( i <= 279){
+                group_code = getInfatingBinary(BitBuff.convert( i - 256 ),7);
+            }else {
+                group_code = getInfatingBinary(BitBuff.convert( i - 88 ),8);
+            }
+
+            for (int j = 0;j<length_group.length;j++){
+                int len = length_group[j];
+                BitBuff huffman_code = new BitBuff().append(group_code).append(getExtraBitsOfLength(len).reverse());
+                fiexdLitTable.put(huffman_code, len + 254 );
+            }
+        }
+        return fiexdLitTable;
+    }
+
+
+    /**
+     * 获得静态huffman编码的DIST表，相当于
+
+     Lit Value    Bits        Codes
+     ---------    ----        -----
+     0 - 143       8          00110000 through 10111111     (48 到 191)
+     144 - 255     9          110010000 through 111111111   (400 到 511)
+     256 - 279     7          0000000 through   0010111     (0 到 23)
+     280 - 287     8          11000000 through  11000111    (192 到 199)
+     * @return
+     */
+    public static HashMap<BitBuff,Integer> getFixedDistTable(){
+        HashMap<BitBuff,Integer> fiexdDistTable = new HashMap<>();
+        final int dist_code_len = 5;
+        for (int i = 0; i <= 29 ; i++ ){
+            //n为第i项cll所表示的码字长度
+            int[] distance_group = DISTANCE_GROUP_CODE[i];
+            for (int j = 0;j<distance_group.length;j++){
+                int distance = distance_group[j];
+                BitBuff huffman_code = getInfatingBinary(BitBuff.convert(i),dist_code_len).append(getExtraBitsOfDistance(distance).reverse());
+                fiexdDistTable.put(huffman_code, distance );
+            }
+        }
+        return fiexdDistTable;
+    }
 
     private static int getMaxValue(int[] values){
         int max = values[0];

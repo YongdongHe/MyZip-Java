@@ -15,6 +15,7 @@ public class BitBuff extends BitSet {
         this.buffLength = nbits;
     }
 
+
     public int getBuffLength(){
         return buffLength;
     }

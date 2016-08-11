@@ -50,6 +50,10 @@ public class UnPackHelper {
     //CLL
     private HashMap<BitBuff,Integer> huffman3;
 
+    //静态huffman编码
+    private static HashMap<BitBuff,Integer> huffman_dist;
+    private static HashMap<BitBuff,Integer> huffman_lit;
+
     //32KB大小的字典
     public static final int deflateDicSize = 32768;
     public static final int outputBuffSize = 1;
@@ -71,7 +75,7 @@ public class UnPackHelper {
 
     public void unpack()throws UnpackException,FileNotFoundException{
         //解压前的初始化工作
-        String name = "rfc.txt";
+        String name = "largepic.jpg";
         String outPath = "./";
         out = new FileOutputStream(new File(outPath + name));
         dictionary = new LinkedList<>();
@@ -89,10 +93,17 @@ public class UnPackHelper {
             if ( HEADER.get(2) && !HEADER.get(1)){
                 //HEADER = 10 动态huffman
                 dynamicHuffmanUnPack();
-            }else if (!HEADER.get(2) || HEADER.get(1)){
+            }else if (!HEADER.get(2) && HEADER.get(1)){
                 //HEADER = 01 静态huffman
-            }else if (!HEADER.get(2) || !HEADER.get(1)){
+                System.out.println("FixedCode");
+                fixedHuffmanUnPack();
+                System.out.println("FixedCode End");
+            }else if (!HEADER.get(2) && !HEADER.get(1)){
                 //HEADER = 00 直接存储
+                System.out.println("Stored");
+                nocompressedUnPack();
+            }else {
+                throw new UnpackException("reserved compressed data header(error)");
             }
         }
     }
@@ -148,6 +159,53 @@ public class UnPackHelper {
             e.printStackTrace();
         }
 
+    }
+
+    private void fixedHuffmanUnPack()throws UnpackException{
+        if (huffman_dist == null || huffman_lit == null){
+            huffman_dist = UnPackUtils.getFixedDistTable();
+            huffman_lit =  UnPackUtils.getFixedLitTable();
+            UnPackUtils.printHuffman1Table(huffman_lit);
+            UnPackUtils.printHuffman2Table(huffman_dist);
+        }
+        buff.clear();
+        try{
+            while(true){
+                buff.append(getBit());
+                if (huffman_lit.containsKey(buff)){
+                    int value = huffman_lit.get(buff);
+                    if (256 == value){
+                        Logln("end");
+                        break;
+                    }else if (value < 256){
+                        //说明是literal，直接输出
+                        outputByte(value);
+                    }else if (value >= 257 && value <= 512){
+                        //说明是length
+                        int v_length = value - 254;
+                        BitBuff dst_buff = new BitBuff();
+                        while(!huffman_dist.containsKey(dst_buff)){
+                            //一直取，直到dst_buff可以解码为一个距离
+                            dst_buff.append(getBit());
+                        }
+                        int v_distance = huffman_dist.get(dst_buff);
+                        if (v_distance == 1707){
+                            int a = 0;
+                        }
+                        outputByteWithDistanceAndLength(v_distance,v_length);
+                    }else {
+                        throw new UnpackException("A value bigger than 256,but not a distance");
+                    }
+                    buff.clear();
+                }
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    private void nocompressedUnPack()throws UnpackException{
 
     }
 
@@ -162,18 +220,10 @@ public class UnPackHelper {
 //        System.out.print((char)value);
         dictionary.offer((byte)value);
         dic_element_num += 1;
-        if (dic_element_num == 32765){
-            int b = 1;
-        }
-        while (dic_element_num >= deflateDicSize){
+        while (dic_element_num > deflateDicSize){
             dictionary.poll();
             dic_element_num -= 1;
         }
-        if (dic_element_num != dictionary.size()){
-            int a = 1;
-        }
-        System.out.println(dictionary.size());
-        System.out.println(dic_element_num);
         if (outputBuff.remaining() == 0){
             out.write(outputBuff.array());
             outputBuff.clear();
@@ -281,7 +331,7 @@ public class UnPackHelper {
             return cls;
         }catch (IndexOutOfBoundsException e){
             e.printStackTrace();
-            throw new UnpackException("Wrong cl1 arrays");
+            throw new UnpackException("Wrong cl arrays");
         }
     }
 
@@ -330,8 +380,9 @@ public class UnPackHelper {
     //从文件缓冲区中获得一个字节
     private byte getByte(){
         //TODO  对compressedSize超出int表示范围时仍需要修改
+        long remaining;
         if (byteIndex == 0){
-            long remaining = mappedByteBuffer.remaining();
+            remaining = mappedByteBuffer.remaining();
             if (remaining > DATA_BUFF_SIZE){
                 dataBuff = new byte[DATA_BUFF_SIZE];
             }

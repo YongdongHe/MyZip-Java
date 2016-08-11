@@ -31,7 +31,9 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        BitBuff n = BitBuff.convert(7);
+        BitBuff a = new BitBuff().append(n);
+        System.out.println(a);
     }
 
     public static void ZipFunc()throws IOException{
@@ -89,7 +91,7 @@ public class Main {
     }
 
     public static void MyZipFunc()throws IOException{
-        MyZipFile file = new MyZipFile("./rfc.zip");
+        MyZipFile file = new MyZipFile("./largepic.zip");
         try {
             file.parseFile();
             for(MyZipEntry entry : file.entryIndices()){

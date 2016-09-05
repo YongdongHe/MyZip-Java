@@ -92,4 +92,6 @@ interface MyZipConstants {
     static final int ENDSIZ = 12;       // central directory size in bytes
     static final int ENDOFF = 16;       // offset of first CEN header
     static final int ENDCOM = 20;       // zip file comment length
+
+    static final long MaxEndSize = 22 + 1024 * 64;
 }

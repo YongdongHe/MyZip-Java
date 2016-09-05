@@ -5,10 +5,12 @@ import com.tencent.mobile.main.com.tencent.mobile.zip.*;
 
 import java.io.*;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.ByteChannel;
 import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.zip.*;
@@ -31,21 +33,9 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        long LEN = 0x00;
-//        byte byte0 = 0x01;
-//        byte byte1 = 0x01;
-//        byte byte2 = 0x01;
-//        byte byte3 = 0x01;
-//        LEN |= byte0;
-//        LEN |= (byte1<<8);
-//        LEN |= (byte2<<16);
-//        LEN |= (byte3<<24);
-//        System.out.println(LEN);
-//        byte a =(byte)0xff;
-//        System.out.println(a);
-//        System.out.println((int)a);
-//        int b = 255;
-//        System.out.println((byte)(b-256));
+
+
+
     }
 
     public static void ZipFunc()throws IOException{
@@ -103,33 +93,21 @@ public class Main {
     }
 
     public static void MyZipFunc()throws IOException{
-        MyZipFile file = new MyZipFile("./pic1.zip");
+        MyZipFile file = new MyZipFile("./dir.zip");
         try {
             file.parseFile();
-            for(MyZipEntry entry : file.entryIndices()){
-                entry.unpack();
+//            file.unpack("./example2/");
+            for (MyZipEntry entry : file.entryIndices()){
+                entry.unpack("./example2/");
+                System.out.println(entry.getFileName());
             }
             file.close();
         } catch (ZipFormatException e) {
             e.printStackTrace();
-        } catch (UnpackException e1){
+        }
+        catch (UnpackException e1){
             e1.printStackTrace();
         }
-//        System.out.println("*******");
-//        ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream("./yyb.zip"));
-//        ZipEntry entry;
-//        while (null != (entry = zipInputStream.getNextEntry())){;
-//            System.out.println("method : " + entry.getMethod());
-//            System.out.println("modiefiedtime : " + entry.getLastModifiedTime());
-//            System.out.println("accesstime : " + entry.getLastAccessTime());
-//            System.out.println("date : " + "");
-//            System.out.println("crc : " + Long.toHexString(entry.getCrc()));
-//            System.out.println("compressedSize : " + entry.getCompressedSize());
-//            System.out.println("uncompressedSize : " + entry.getSize());
-//            System.out.println("fileNameLength : " + entry.getName().length());
-//            System.out.println("extraFieldLength : " + Arrays.toString(entry.getExtra()));
-//        }
-//        zipInputStream.close();
     }
 
     public static void UnZipFunc()throws IOException {

@@ -73,45 +73,59 @@ public class UnPackHelper {
     }
 
 
-    public void unpack() throws UnpackException, IOException {
+    public void unpack(String path) throws UnpackException, IOException {
         //解压前的初始化工作
-        String name = "pic.jpg";
-        String outPath = "./";
-        out = new FileOutputStream(new File(outPath + name));
+        File outFile = new File(path);
+        if (!outFile.exists()&&path.endsWith("/")){
+            outFile.mkdirs();
+        }else {
+            outFile.createNewFile();
+        }
+        if (outFile.isDirectory())
+            return;
+        out = new FileOutputStream(outFile);
         dictionary = new LinkedList<>();
         outputBuff = ByteBuffer.allocate(outputBuffSize);
 
         buff.clear();
         boolean isEnd = false;
-        while (!isEnd){
-            HEADER.clear();
-            HEADER.append(getBit(3));
-            if(HEADER.get(0)){
-                //HEADER第一位是1时，说明是最后一个数据段,本次解码后便结束解码
-                isEnd = true;
+        try{
+            while (!isEnd){
+                HEADER.clear();
+                HEADER.append(getBit(3));
+                if(HEADER.get(0)){
+                    //HEADER第一位是1时，说明是最后一个数据段,本次解码后便结束解码
+                    isEnd = true;
+                }
+                if ( HEADER.get(2) && !HEADER.get(1)){
+                    //HEADER = 10 动态huffman
+                    dynamicHuffmanUnPack();
+                }else if (!HEADER.get(2) && HEADER.get(1)){
+                    //HEADER = 01 静态huffman
+                    System.out.println("FixedCode");
+                    fixedHuffmanUnPack();
+                    System.out.println("FixedCode End");
+                }else if (!HEADER.get(2) && !HEADER.get(1)){
+                    //HEADER = 00 直接存储
+                    System.out.println("Stored");
+                    nocompressedUnPack();
+                    System.out.println("Stored Code End");
+                }else {
+                    throw new UnpackException("reserved compressed data header(error)");
+                }
             }
-            if ( HEADER.get(2) && !HEADER.get(1)){
-                //HEADER = 10 动态huffman
-                dynamicHuffmanUnPack();
-            }else if (!HEADER.get(2) && HEADER.get(1)){
-                //HEADER = 01 静态huffman
-                System.out.println("FixedCode");
-                fixedHuffmanUnPack();
-                System.out.println("FixedCode End");
-            }else if (!HEADER.get(2) && !HEADER.get(1)){
-                //HEADER = 00 直接存储
-                System.out.println("Stored");
-                nocompressedUnPack();
-            }else {
-                throw new UnpackException("reserved compressed data header(error)");
-            }
+        }catch (ZipEndException e){
+            //已到压缩数据尾，直接输出缓冲区内所有内容
+            out.write(outputBuff.array());
+            out.flush();
         }
+
         out.close();
     }
 
 
 
-    private void dynamicHuffmanUnPack()throws UnpackException{
+    private void dynamicHuffmanUnPack()throws UnpackException,ZipEndException{
 
         HLIT = new BitBuff().append(getBit(5)).reverse().getValue() + 257;
         System.out.println("HLIT" + HLIT);
@@ -162,7 +176,7 @@ public class UnPackHelper {
 
     }
 
-    private void fixedHuffmanUnPack()throws UnpackException{
+    private void fixedHuffmanUnPack()throws UnpackException,ZipEndException{
         if (huffman_dist == null || huffman_lit == null){
             huffman_dist = UnPackUtils.getFixedDistTable();
             huffman_lit =  UnPackUtils.getFixedLitTable();
@@ -206,7 +220,7 @@ public class UnPackHelper {
 
     }
 
-    private void nocompressedUnPack()throws UnpackException{
+    private void nocompressedUnPack()throws UnpackException,ZipEndException{
         //skip to next word
         skipByte();
         //get the len
@@ -216,9 +230,10 @@ public class UnPackHelper {
         byte byte2 = getByte();
         byte byte3 = getByte();
         LEN |= byte1;
-        LEN |= (byte0<<8);
-        LEN |= (byte2<<24);
-        LEN |= (byte3<<16);
+        LEN |= (byte0 << 8);
+        LEN &= 0X0000ffff;
+//        LEN |= (byte2<<24);
+//        LEN |= (byte3<<16);
         int l = 0;
         try{
             for (long num = 0; num < LEN ; num ++){
@@ -250,7 +265,7 @@ public class UnPackHelper {
         }
     }
 
-    private void outputStoredByte(byte value)throws IOException{
+    private void    outputStoredByte(byte value)throws IOException{
         outputBuff.put(value);
         dictionary.offer(value);
         dic_element_num += 1;
@@ -278,7 +293,7 @@ public class UnPackHelper {
         }
     }
 
-    private void initCLL(int cl1_num){
+    private void initCLL(int cl1_num)throws ZipEndException{
         buff.clear();
         //获得cll序列，总共19项
         int[] clls = new int[19];
@@ -297,7 +312,7 @@ public class UnPackHelper {
     }
 
 
-    private void initCL1(int cl1_num)throws UnpackException{
+    private void initCL1(int cl1_num)throws UnpackException,ZipEndException{
         int[] cl1s = getCL(cl1_num);
         Logln("\n" + Arrays.toString(cl1s));
         huffman1 = UnPackUtils.getMapOfCL1(cl1s);
@@ -307,7 +322,7 @@ public class UnPackHelper {
 
 
 
-    private void initCL2(int cl2_num)throws UnpackException{
+    private void initCL2(int cl2_num)throws UnpackException,ZipEndException{
         int[] cl2s = getCL(cl2_num);
         Logln("\n" + Arrays.toString(cl2s));
         huffman2 = UnPackUtils.getMapOfCL2(cl2s);
@@ -316,7 +331,7 @@ public class UnPackHelper {
     }
 
 
-    private int[] getCL(int cl_num)throws UnpackException{
+    private int[] getCL(int cl_num)throws UnpackException,ZipEndException{
         BitBuff flag = new BitBuff();
         buff.clear();
         int cl_count = 0;
@@ -387,7 +402,7 @@ public class UnPackHelper {
 
 
     //从字节缓冲区内获得一个bit
-    private boolean getBit(){
+    private boolean getBit()throws ZipEndException{
         if (bitIndex == 0){
             byte next_byte = getByte();
             byteBuff = UnPackUtils.getBitBuff(next_byte,8);
@@ -405,7 +420,7 @@ public class UnPackHelper {
     }
 
     //从字节缓冲区内获得num个bit
-    private boolean[] getBit(int num){
+    private boolean[] getBit(int num)throws ZipEndException{
         boolean[] bits = new boolean[num];
         for (int i = 0;i<num;i++){
             bits[i] = getBit();
@@ -417,11 +432,51 @@ public class UnPackHelper {
     int byteIndex = 0;
     long totalIndex = 0;
     //从文件缓冲区中获得一个字节
-    private byte getByte(){
+    private byte getByte()throws ZipEndException{
         //TODO  对compressedSize超出int表示范围时仍需要修改
+//        long remaining;
+//        if (byteIndex == 0){
+//            remaining = mappedByteBuffer.remaining();
+//            if (remaining == 0){
+//                //压缩数据已读取完
+//                throw new ZipEndException();
+//            }
+//            if (remaining > DATA_BUFF_SIZE){
+//                dataBuff = new byte[DATA_BUFF_SIZE];
+//                totalIndex += DATA_BUFF_SIZE;
+//            }
+//            else{
+//                //remaining已经小于DATA_BUFF_SIZE了
+//                dataBuff = new byte[(int)remaining];
+//                totalIndex += remaining;
+//            }
+//            try{
+//                mappedByteBuffer.get(dataBuff,0,dataBuff.length);
+//            }catch (IndexOutOfBoundsException e){
+//                e.printStackTrace();
+//            }
+//
+//        }
+//        try{
+//            byte next_byte = dataBuff[byteIndex];
+//            byteIndex = (byteIndex + 1)%dataBuff.length;
+//            return next_byte;
+//        }catch (IndexOutOfBoundsException e){
+//            e.printStackTrace();
+//            try {
+//                out.write(outputBuff.array());
+//                out.flush();
+//            } catch (IOException e1) {
+//                e1.printStackTrace();
+//            }
+//        }
         long remaining;
         if (byteIndex == 0){
             remaining = mappedByteBuffer.remaining();
+            if (remaining == 0){
+                //压缩数据已读取完
+                throw new ZipEndException();
+            }
             if (remaining > DATA_BUFF_SIZE){
                 dataBuff = new byte[DATA_BUFF_SIZE];
                 totalIndex += DATA_BUFF_SIZE;
@@ -436,7 +491,6 @@ public class UnPackHelper {
             }catch (IndexOutOfBoundsException e){
                 e.printStackTrace();
             }
-
         }
         try{
             byte next_byte = dataBuff[byteIndex];
@@ -444,14 +498,28 @@ public class UnPackHelper {
             return next_byte;
         }catch (IndexOutOfBoundsException e){
             e.printStackTrace();
-            try {
-                out.write(outputBuff.array());
-                out.flush();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
         }
         return 0x00;
     }
 
+    private class ZipEndException extends Exception{
+        public ZipEndException() {
+        }
+
+        public ZipEndException(String message) {
+            super(message);
+        }
+
+        public ZipEndException(String message, Throwable cause) {
+            super(message, cause);
+        }
+
+        public ZipEndException(Throwable cause) {
+            super(cause);
+        }
+
+        public ZipEndException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+            super(message, cause, enableSuppression, writableStackTrace);
+        }
+    }
 }

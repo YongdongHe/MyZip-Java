@@ -1,8 +1,10 @@
 package com.tencent.mobile.main.com.tencent.mobile.zip;
 
 import java.io.*;
+import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -37,11 +39,20 @@ public class MyZipFile implements MyZipConstants {
                 .getChannel();
     }
 
+    public void unpack(String path)throws IOException,UnpackException{
+        if (!path.endsWith("/"))
+            throw new UnpackException("The unpack path is not a directory.");
+        for(MyZipEntry entry : this.entryIndices()){
+            entry.unpack(path);
+            System.out.println(entry.getFileName());
+        }
+    }
 
     public void parseFile()throws IOException,ZipFormatException{
         parseLocalFile();
-
     }
+
+
     private void parseLocalFile()throws IOException,ZipFormatException{
         long position = 0;
         //TODO  判断文件是否为最后一个压缩数据段
@@ -58,11 +69,37 @@ public class MyZipFile implements MyZipConstants {
                 return;
             }
             MyZipEntry entryIndex = new MyZipEntry(locBytes,file);
+            byte[] nameBytes = new byte[entryIndex.getFileNameLength()];
+            byte[] extrafieldBytes = new byte[entryIndex.getExtraFieldLength()];
+            mappedByteBuffer.get(nameBytes);
+            mappedByteBuffer.get(extrafieldBytes);
+            entryIndex.setFilename(new String(nameBytes, "gbk"));
+            entryIndex.setExtraField(new String(extrafieldBytes));
             entryIndex.setStartPosition(position);
             myZipEntries.add(entryIndex);
             //移动光标到文件末尾
             position += entryIndex.getLength();
         }
+    }
+
+
+    private void parseFileDirectory()throws IOException,ZipFormatException{
+        
+    }
+
+    private long getFileDirectoryPosition()throws IOException,ZipFormatException{
+        long endSize = 0;
+        long fileLen = file.length();
+        if(file.length() <= MyZipConstants.MaxEndSize  ){
+            mappedByteBuffer =  channel.map(FileChannel.MapMode.READ_ONLY,0,fileLen);
+            endSize = fileLen;
+        }else {
+            mappedByteBuffer = channel.map(FileChannel.MapMode.READ_ONLY,fileLen - MyZipConstants.MaxEndSize ,MyZipConstants.MaxEndSize);
+            endSize = MyZipConstants.MaxEndSize;
+        }
+        mappedByteBuffer.flip();
+        //// TODO: 2016/8/27 完成CD的解码
+        return 1;
     }
 
     private long getLength(){

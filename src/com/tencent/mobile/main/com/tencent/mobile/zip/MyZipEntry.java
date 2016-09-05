@@ -1,7 +1,6 @@
 package com.tencent.mobile.main.com.tencent.mobile.zip;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.attribute.FileTime;
 import java.util.concurrent.TimeUnit;
@@ -22,6 +21,9 @@ public class MyZipEntry implements MyZipConstants{
     private int fileNameLength = -1;       //    file name length                2 bytes
     private int extraFieldLength = -1;     //    extra file length               2 bytes
     private long startPosition = -1;       //    total length of data and local file header
+    private String fileName;
+    private String extraField;
+
 
 
     private File file;
@@ -48,10 +50,12 @@ public class MyZipEntry implements MyZipConstants{
         this.file = file;
     }
 
-    public void unpack()throws IOException,UnpackException{
+    public void unpack(String path)throws IOException,UnpackException{
         if (unPackHelper == null)
             unPackHelper = new UnPackHelper(file,startPosition + getHeaderLength(),compressedSize);
-        unPackHelper.unpack();
+        if (!path.endsWith("/"))
+            throw new UnpackException("The unpack path is not a directory.");
+        unPackHelper.unpack(path + fileName);
     }
 
     public void print(){
@@ -204,5 +208,21 @@ public class MyZipEntry implements MyZipConstants{
 
     public void setStartPosition(long startPosition) {
         this.startPosition = startPosition;
+    }
+
+    public void setFilename(String filename) {
+        this.fileName = filename;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public String getExtraField() {
+        return extraField;
+    }
+
+    public void setExtraField(String extraField) {
+        this.extraField = extraField;
     }
 }

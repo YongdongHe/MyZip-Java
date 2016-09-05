@@ -10,8 +10,35 @@ import java.util.concurrent.TimeUnit;
  */
 public class MyZipUtils {
 
+
+
     // used to adjust values between Windows and java epoch
     private static final long WINDOWS_EPOCH_IN_MICROSECONDS = -11644473600000000L;
+
+
+    public static String utf8ToUnicode(String inStr) {
+        char[] myBuffer = inStr.toCharArray();
+
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < inStr.length(); i++) {
+            Character.UnicodeBlock ub = Character.UnicodeBlock.of(myBuffer[i]);
+            if(ub == Character.UnicodeBlock.BASIC_LATIN){
+                //英文及数字等
+                sb.append(myBuffer[i]);
+            }else if(ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS){
+                //全角半角字符
+                int j = (int) myBuffer[i] - 65248;
+                sb.append((char)j);
+            }else{
+                //汉字
+                short s = (short) myBuffer[i];
+                String hexS = Integer.toHexString(s);
+                String unicode = "\\u"+hexS;
+                sb.append(unicode.toLowerCase());
+            }
+        }
+        return sb.toString();
+    }
 
     /**
      * Converts Windows time (in microseconds, UTC/GMT) time to FileTime.
